@@ -5,7 +5,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #898989;
-  background-color: #F3FDE8;
+  background-color: #f3fde8;
 }
 
 /* common end*/
@@ -26,19 +26,23 @@ header {
   font-size: 22px;
   font-weight: 700;
   color: #010101 !important;
-  padding: 0 53px !important ;
+  padding: 0 53px !important;
+  margin-left: 10px;
+  width: 180px;
   transition: 0.5s !important;
+  border-radius: 30px;
+  text-align: center;
 }
-.menu ul li:last-child a {
-  padding-right: 0 !important;
-}
+
 .menu ul li a:hover {
   color: white !important;
+  background-color: #010101 !important;
 }
+
 /*header end*/
 /* slider start*/
 .slider {
-  background-color: #F3FDE8;
+  background-color: #f3fde8;
   padding-bottom: 100px;
 }
 .s_content {
@@ -92,12 +96,12 @@ header {
 
 .c_ind .active {
   opacity: 1;
-  background-color: white;
+  background-color: rgb(151, 221, 201);
 }
 /* slider end*/
-/* services start*/
+/* catagories start*/
 
-.services {
+.catagories {
   padding-top: 100px;
   padding-bottom: 120px;
 }
@@ -116,7 +120,27 @@ header {
 }
 
 .single_item {
-  margin-top: 60px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.single_item:hover,
+.single_item:focus {
+  background-color: #f3fde8;
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.single_item a {
+  text-decoration: none;
+  color: #313841;
 }
 
 .a_icon {
@@ -138,7 +162,7 @@ header {
   line-height: 20px;
   letter-spacing: 1px;
 }
-/* services end*/
+/* catagories end*/
 /* contact start*/
 .contact {
   background-color: #010101;
@@ -146,7 +170,7 @@ header {
   padding-bottom: 120px;
 }
 .yellow {
-  color: #F3FDE8;
+  color: #f3fde8;
 }
 .ash {
   color: #898989;
@@ -176,12 +200,12 @@ header {
   font-weight: 700;
   color: #010101;
   text-transform: uppercase;
-  background-color: #F3FDE8;
+  background-color: #f3fde8;
   cursor: pointer;
   transition: 0.3s;
 }
 .c_button:hover {
-  color: #F3FDE8;
+  color: #f3fde8;
   background-color: white;
 }
 .c_button:focus {
@@ -197,7 +221,7 @@ header {
   padding: 5px 10px;
 }
 .s_media ul li a {
-  color: #F3FDE8;
+  color: #f3fde8;
   font-size: 42px;
 }
 .s_media ul li a:hover {
@@ -224,6 +248,24 @@ footer {
   transition: 0.3s;
 }
 .f_2 ul li a:hover {
-  color: #F3FDE8;
+  color: #f3fde8;
 }
 /* footer end*/
+
+
+/* Article start*/
+.my-card {
+  transition: transform 0.2s, background-color 0.2s;
+  background-color: #f3fde8;
+  text-align: justify;
+}
+
+.my-card:hover {
+  transform: translateY(-5px); /* Add a slight upward translation on hover */
+  background-color: rgb(229, 255, 226); /* Change background color on hover */
+}
+
+.card-title{
+  color: #313841;
+}
+/* Article end*/
