@@ -14,21 +14,26 @@ header {
   /* background-color: #F3FDE8; */
   padding: 20px 0;
 }
+/* .navbar-brand{
+width: 25%;
+} */
 
 .logo {
-  width: 25%;
+  width: 50%;
+  display: inline-block;
 }
 .navbar-light .navbar-toggler {
   color: rgba(21, 185, 235, 0.55);
   border-color: rgb(10 10 10 / 10%);
 }
 .menu ul li a {
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 700;
   color: #010101 !important;
-  padding: 0 53px !important;
+  /* padding: 0 53px !important; */
   margin-left: 10px;
-  width: 180px;
+  width: 100px;
+  /* height: 50px; */
   transition: 0.5s !important;
   border-radius: 30px;
   text-align: center;
@@ -45,8 +50,7 @@ header {
   background-color: #f3fde8;
   padding-bottom: 100px;
 }
-.s_content {
-}
+
 .s_content h1 {
   margin-bottom: 25px;
   font-size: 32px;
@@ -63,8 +67,6 @@ header {
 .s_content p {
   margin-bottom: 40px;
   color: #555555;
-}
-.s_icon {
 }
 
 .s_icon ul li {
@@ -105,8 +107,7 @@ header {
   padding-top: 100px;
   padding-bottom: 120px;
 }
-.c_title {
-}
+
 .c_h1 {
   font-size: 32px;
   font-weight: 700;
@@ -128,7 +129,8 @@ header {
 
 .single_item:hover,
 .single_item:focus {
-  background-color: #f3fde8;
+  /* background-color: #f3fde8; */
+  background-color: rgb(229, 255, 226);
   transform: translateY(-5px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -162,12 +164,31 @@ header {
   line-height: 20px;
   letter-spacing: 1px;
 }
+
+/* Category Link */
+/* Apply styles to the "Catagories" link */
+.c_h1 a {
+  text-decoration: none;
+  color: #010101;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block; /* Add this line */
+}
+
+/* Apply styles to the paragraph text */
+.c_p {
+  color: #313841;
+}
+
+/* Hover effect for the "Catagories" link */
+.c_h1 a:hover {
+  transform: translateY(-5px);
+}
+
 /* catagories end*/
 /* contact start*/
 .contact {
   background-color: #010101;
   padding-top: 100px;
-  padding-bottom: 120px;
 }
 .yellow {
   color: #f3fde8;
@@ -200,20 +221,21 @@ header {
   font-weight: 700;
   color: #010101;
   text-transform: uppercase;
-  background-color: #f3fde8;
+  background-color: #afb8a5;
   cursor: pointer;
   transition: 0.3s;
+  border: 2px solid #afb8a5;
+  /* border-radius: 30px; */
 }
 .c_button:hover {
-  color: #f3fde8;
-  background-color: white;
+  color: #010101;
+  background-color: #f3fde8;
 }
 .c_button:focus {
   outline: 0;
   box-shadow: none;
 }
-.s_media {
-}
+
 .s_media ul {
   margin-bottom: 0;
 }
@@ -232,16 +254,15 @@ header {
 footer {
   background-color: #010101;
   padding-bottom: 120px;
+  padding-top: 120px;
 }
-.f_1 {
-}
+
 .f_1 p {
   color: white;
   margin-bottom: 4px;
   line-height: 20px;
 }
-.f_2 {
-}
+
 .f_2 ul li a {
   text-decoration: none;
   color: white;
@@ -252,20 +273,81 @@ footer {
 }
 /* footer end*/
 
-
 /* Article start*/
 .my-card {
-  transition: transform 0.2s, background-color 0.2s;
+  /* transition: transform 0.2s, background-color 0.2s; */
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f3fde8;
+  text-align: justify;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.my-card:hover {
+  transform: translateY(-5px);
+  background-color: rgb(229, 255, 226);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.card-title {
+  color: #313841;
+}
+
+.verticle-card-row {
+  margin-top: 0.3rem;
+}
+
+.verticle-card {
+  transition: transform 0.2s, box-shadow 0.2s;
   background-color: #f3fde8;
   text-align: justify;
 }
 
-.my-card:hover {
-  transform: translateY(-5px); /* Add a slight upward translation on hover */
-  background-color: rgb(229, 255, 226); /* Change background color on hover */
+.verticle-card:hover {
+  transform: translateY(-5px);
+  background-color: rgb(229, 255, 226);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.card-title{
-  color: #313841;
-}
 /* Article end*/
+/* Articles.html Start */
+.latest-link {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+  margin-left: 5px;
+  padding: auto;
+}
+
+.latest-link:hover {
+  color: #ff5733;
+  transform: translateX(5px);
+}
+/* Articles.html End */
+/* Scroll to top Start */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Place the button on the right side */
+    background-color: #afb8a5; /* Blue background color */
+    color: #fff; /* Text color */
+    width: 40px; /* Width of the button */
+    height: 40px; /* Height of the button */
+    border-radius: 50%; /* Make it round */
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border: 2px solid #afb8a5;
+}
+
+/* Hover effect */
+.scroll-to-top:hover {
+    background-color: #f3fde8;
+    color: #010101; /* Darker blue on hover */
+}
+
+
+/* Scroll to top End */
