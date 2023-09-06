@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Prepare a SELECT query with a placeholder for username
-    $sql = "SELECT user_id, username, password FROM Users WHERE username = ?";
+    $sql = "SELECT user_id, username, email, password, role FROM Users WHERE username = ?";
 
     // Create a prepared statement
     $stmt = $conn->prepare($sql);
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     // Bind the result
-    $stmt->bind_result($user_id, $dbUsername, $dbPassword);
+    $stmt->bind_result($user_id, $dbUsername, $dbEmail, $dbPassword, $dbRole);
 
     // Fetch the result
     if ($stmt->fetch()) {
@@ -33,7 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION["user_id"] = $user_id;
             $_SESSION["username"] = $dbUsername;
-            header("Location: index.php"); // Replace with the profile page URL
+            $_SESSION["role"] = $dbRole;
+            $_SESSION["email"] = $dbEmail;
+
+            header("Location: index.php");
             exit();
         } else {
             // Password is incorrect
@@ -50,8 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Redirect to signin_page.php with the error message as a URL parameter
 if (!empty($error)) {
-    $encodedError = urlencode($error);
-    header("Location: signin_page.php?error=" . $encodedError);
+    header("Location: signin_page.php?error=" . urlencode($error));
     exit();
 }
 ?>

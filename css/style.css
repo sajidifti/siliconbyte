@@ -15,7 +15,7 @@ header {
 }
 
 .logo {
-  width: 50%;
+  max-width: 200px;
   display: inline-block;
 }
 .navbar-light .navbar-toggler {
@@ -225,6 +225,16 @@ header {
   border: 2px solid #afb8a5;
   /* border-radius: 30px; */
 }
+.alt-button {
+  background-color: #ccc;
+  border: 2px solid #ccc;
+  width: fit-content;
+  margin-right: 10px;
+  text-align: center;
+  /* padding-bottom: 0; */
+  /* margin-bottom: 0; */
+  padding-top: 12px;
+}
 .c_button:hover {
   color: #010101;
   background-color: #f3fde8;
@@ -349,7 +359,7 @@ footer {
 /* Scroll to top End */
 
 /* সাইন ইন শুরু */
-.custom-form-section{
+.custom-form-section {
   min-height: 60vh;
 }
 .form-title {
@@ -391,3 +401,17 @@ footer {
   overflow: hidden;
   border-radius: 50%;
 }
+
+/* Profile.html Start */
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container button {
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* Profile.html End */

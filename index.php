@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -24,8 +27,8 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <!--logo-->
-          <a class="navbar-brand" href="index.html">
-            <img src="images/stock/logo.png" class="img-fluid logo" alt="tinyone">
+          <a class="navbar-brand" href="index.php">
+            <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
           </a>
           <!-- hambarger btn-->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
@@ -37,29 +40,36 @@
           <div class="collapse navbar-collapse menu" id="nav_c">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">হোম</a>
+                <a class="nav-link" href="index.php">হোম</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="articles.html">সব খবর</a>
+                <a class="nav-link" href="articles.php">সব খবর</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">লিখুন</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">ব্যাবস্থাপনা</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">প্রোফাইল</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">সাইনআপ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">লগিন</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">লগআউট</a>
-              </li>
+              <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if ($_SESSION['role'] == "writer"): ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="post_page.php">লিখুন</a>
+                  </li>
+                <?php endif; ?>
+                <?php if ($_SESSION['role'] == "admin"): ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="admin.php">ব্যাবস্থাপনা</a>
+                  </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.php">প্রোফাইল</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="signout.php">সাইনআউট</a>
+                </li>
+              <?php else: ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="signup_page.php">সাইনআপ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="signin_page.php">সাইনইন</a>
+                </li>
+              <?php endif; ?>
 
             </ul>
 
@@ -71,6 +81,26 @@
     </div>
   </header>
   <!-- header end-->
+  <!-- Error message display -->
+  <section class="message">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <?php
+          if (!empty($_GET['error'])) {
+            $errorMessage = urldecode($_GET['error']);
+            echo '<div class="alert alert-danger text-center" role="alert">' . $errorMessage . '</div>';
+          }
+          if (!empty($_GET['success'])) {
+            $successMessage = urldecode($_GET['success']);
+            echo '<div class="alert alert-success text-center" role="alert">' . $successMessage . '</div>';
+          }
+          ?>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Error message display end -->
   <!-- slider start-->
   <section id="slider" class="slider">
     <div class="container">
@@ -165,7 +195,7 @@
                 </div>
               </div>
               <!-- items end-->
-              
+
             </div>
           </div>
           <!-- carousel end-->
@@ -782,9 +812,9 @@
   <!-- footer end-->
 
   <!-- Scroll to The Top -->
-<div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">
-  ^
-</div>
+  <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">
+    ^
+  </div>
 
 
   <!--  Bootstrap JS link -->

@@ -19,24 +19,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordPattern = "/^(?=.*\d)(?=.*[A-Za-z])[A-Za-z\d!@#$%^&*()_+]{8,}$/"; // At least 8 characters, including letters and numbers
 
     // Validate name
-    if (!preg_match("/^[A-Za-z\s]+$/", $name)) {
-        $error = "Invalid name format. Please use only letters and spaces.";
+    if (!preg_match("/^[A-Za-zঅ-ঐক-য়\s]+$/", $name)) {
+        $error = "নামের ফরমেট ঠিক নেই। শুধুমাত্র বর্ণমালা লিখুন।";
     }
     // Validate username
     elseif (!preg_match($usernamePattern, $username)) {
-        $error = "Invalid username format. Please use only letters, numbers, and underscores.";
+        $error = "ইউজারনেমের ফরমেট ঠিক নেই। শুধুমাত্র বর্ণমালা, সংখ্যা, এবং আন্ডারস্কোর লিখুন।";
     }
     // Validate email using filter_var
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format. Please enter a valid email address.";
+        $error = "ইমেইল ঠিকানার ফরমেট ঠিক নেই। সঠিক ইমেইল লিখুন।";
     }
     // Validate password
     elseif (!preg_match($passwordPattern, $password)) {
-        $error = "Invalid password format. Password must be at least 8 characters and contain both letters and numbers.";
+        $error = "পাসওয়ার্ডের ফরমেট ঠিক নেই। সর্বনিম্ন ৮ টি অক্ষর এবং সংখ্যা লিখুন।";
     }
     // Check if password and confirm password match
     elseif ($password !== $confirm_password) {
-        $error = "Password and confirm password do not match.";
+        $error = "পাসওয়ার্ডদ্বয় মেলে নি। আবার চেষ্টা করুন।";
     } else {
         // Check if the username already exists in the database
         $checkUsernameQuery = "SELECT username FROM Users WHERE username = ?";
@@ -54,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If a row is fetched, it means the username or email already exists
         if ($checkUsernameStmt->num_rows > 0) {
-            $error = "Username already exists. Please choose another.";
+            $error = "ইউজারনেম আগে ব্যবহৃত হয়েছে। দয়া করে পুনরায় চেষ্টা করুন।";
         } elseif ($checkEmailStmt->num_rows > 0) {
-            $error = "Email already exists. Please use a different email address.";
+            $error = "ইমেইল ঠিকানা আগে ব্যবহৃত হয়েছে। দয়া করে পুনরায় চেষ্টা করুন।";
         } else {
             // If all validations pass and no duplicate username or email, proceed with registration
             $password = password_hash($password, PASSWORD_DEFAULT);
@@ -82,17 +82,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Insert user data into the Users table
-            $sql = "INSERT INTO Users (fullname, username, email, password, profile_photo) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO Users (fullname, username, email, password, role, profile_photo) VALUES (?, ?, ?, ?, 'reader', ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sssss", $name, $username, $email, $password, $profilePicture);
+
 
             if ($stmt->execute()) {
                 // Registration successful, redirect to a success page or login page
                 // Registration successful, set the success message
-                $successMessage = "Registration successful. You can now sign in.";
+                $success = "নিবন্ধন সফল হয়েছে। সাইনইন করুন।";
 
                 // Redirect to signin_page.php with the success message
-                header("Location: signin_page.php?success=" . urlencode($successMessage));
+                header("Location: signin_page.php?success=" . urlencode($success));
                 exit();
             } else {
                 // Registration failed, handle the error

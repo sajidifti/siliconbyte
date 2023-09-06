@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -18,63 +21,66 @@
 
 <body>
     <!-- header start-->
-    <header>
-        <div class="container">
-            <!-- nav start-->
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <!--logo-->
-                    <a class="navbar-brand" href="index.html">
-                        <img src="images/stock/logo.png" class="img-fluid logo" alt="tinyone">
-                    </a>
-                    <!-- hambarger btn-->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
-                        aria-controls="nav_c" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!--nav items-->
+  <header>
+    <div class="container">
+      <!-- nav start-->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <!--logo-->
+          <a class="navbar-brand" href="index.php">
+            <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
+          </a>
+          <!-- hambarger btn-->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
+            aria-controls="nav_c" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!--nav items-->
 
-                    <div class="collapse navbar-collapse menu" id="nav_c">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">হোম</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="articles.html">সব খবর</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">লিখুন</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">ব্যাবস্থাপনা</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">প্রোফাইল</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">সাইনআপ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">লগিন</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">লগআউট</a>
-                            </li>
-
+          <div class="collapse navbar-collapse menu" id="nav_c">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.php">হোম</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="articles.php">সব খবর</a>
+              </li>
+              <?php if (isset($_SESSION['user_id'])): ?>
+                                <?php if ($_SESSION['role'] == "writer"): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="post_page.php">লিখুন</a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php if ($_SESSION['role'] == "admin"): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="admin.php">ব্যাবস্থাপনা</a>
+                                    </li>
+                                <?php endif; ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="profile.php">প্রোফাইল</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signout.php">সাইনআউট</a>
+                                </li>
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signup_page.php">সাইনআপ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="signin_page.php">সাইনইন</a>
+                                </li>
+                            <?php endif; ?>
+    
                         </ul>
-
+    
                     </div>
                 </div>
             </nav>
-
+    
             <!-- nav end-->
         </div>
     </header>
     <!-- header end-->
-
-
-    <!-- Error Here -->
-
     <!-- Error message display -->
     <section class="message">
         <div class="container">
@@ -94,6 +100,7 @@
             </div>
         </div>
     </section>
+    <!-- Error message display end -->
 
     <!-- contact start-->
     <section class="custom-form-section" id="signin">
@@ -120,6 +127,14 @@
                                 <div class="col-lg-8 col-md-8">
                                     <input type="password" class="form-control c_email"
                                         placeholder="আপনার পাসওয়ার্ড লিখুন" name="password" required>
+                                </div>
+                                <div class="col-lg-8 col-md-8">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                                            name="remember">
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">আমাকে মনে
+                                            রাখুন</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-2 container-fluid">
