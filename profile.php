@@ -188,7 +188,7 @@ $conn->close();
                             <div class="col-lg-5 col-md-5 container-fluid">
                                 <div class="button-container">
                                     <a type="submit" class="btn c_button alt-button"
-                                        style="margin-top: 5rem;">পাসওয়ার্ড
+                                        style="margin-top: 5rem;" href="password_page.php">পাসওয়ার্ড
                                         পরিবর্তন</a>
                                     <button type="submit" class="btn c_button" style="margin-top: 5rem;">তথ্য
                                         সংরক্ষণ</button>
