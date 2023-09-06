@@ -72,6 +72,22 @@
     </header>
     <!-- header end-->
 
+
+    <!-- Error Here -->
+
+    <!-- Error message display -->
+    <?php
+    if (!empty($_GET['error'])) {
+        $errorMessage = urldecode($_GET['error']);
+        echo '<div class="alert alert-danger text-center" role="alert">' . $errorMessage . '</div>';
+    }
+    if (!empty($_GET['success'])) {
+        $successMessage = urldecode($_GET['success']);
+        echo '<div class="alert alert-success text-center" role="alert">' . $successMessage . '</div>';
+    }
+    ?>
+
+
     <!-- contact start-->
     <section class="custom-form-section" id="signin">
         <div class="container">
@@ -89,26 +105,30 @@
                 <div class="col-lg-10">
                     <div class="c_form">
                         <form method="POST" action="signup.php" enctype="multipart/form-data">
-                            <div class="row g-3 justify-content-center profile-photo-div">
-                                <div class="col-lg-8 col-md-8 d-flex justify-content-center align-items-center">
-                                    <input type="file" id="profile-photo-input" name="profile_photo" accept="image/*"
-                                        required>
-                                    <label for="profile-photo-input" class="profile-photo-label">
-                                        <div class="profile-photo-preview">
-                                            <img id="profile-photo-preview" class="rounded-circle" src="" />
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
                             <div class="row g-3 justify-content-center">
+                                <!-- Image Preview -->
+                                <div class="col-lg-8 col-md-8 d-flex justify-content-center align-items-center">
+                                    <label for="profile-picture" class="form-label"></label>
+                                    <input type="file" class="form-control" id="profile-picture" name="profile-picture"
+                                        accept="image/*" style="display: none;" onchange="previewImage(this);">
+                                    <!-- Wrap the image and apply circular cropping within a div -->
+                                    <div id="image-preview-wrapper">
+                                        <!-- Wrap the image preview within a label element to make it clickable -->
+                                        <label for="profile-picture" id="image-preview-label">
+                                            <img id="image-preview" src="#" alt="আপনার ফটো প্রিভিউ">
+                                            <span id="upload-text">প্রোফাইল ছবির জন্য<br>এখানে ক্লিক করুন</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- Image Preview -->
+
                                 <div class="col-lg-8 col-md-8">
-                                    <input type="text" class="form-control c_email" placeholder="আপনার পুরো নাম লিখুন"
+                                    <input type="name" class="form-control c_email" placeholder="আপনার পুরো নাম লিখুন"
                                         name="name" required>
                                 </div>
                                 <div class="col-lg-8 col-md-8">
-                                    <input type="text" class="form-control c_email" placeholder="আপনার ইউজারনেম লিখুন"
-                                        name="username" required>
+                                    <input type="username" class="form-control c_email"
+                                        placeholder="আপনার ইউজারনেম লিখুন" name="username" required>
                                 </div>
                                 <div class="col-lg-8 col-md-8">
                                     <input type="email" class="form-control c_email"
@@ -128,20 +148,7 @@
                                 <button type="submit" class="btn c_button" style="margin-top: 5rem;">সাইন আপ</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <!-- 3rd row-->
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <div class="s_media text-center">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"> <a href="#"> <i class="fab fa-facebook-square"></i> </a></li>
-                            <li class="list-inline-item"> <a href="#"> <i class="fab fa-twitter-square"></i> </a></li>
-                            <li class="list-inline-item"> <a href="#"> <i class="fab fa-google-plus-square"></i> </a>
-                            </li>
-                            <li class="list-inline-item"> <a href="#"> <i class="fab fa-pinterest-square"></i> </a></li>
-                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -223,27 +230,25 @@
     <script src="https://kit.fontawesome.com/c204687a77.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
     <script>
-        // JavaScript to display selected profile photo
-        document.getElementById('profile-photo-input').addEventListener('change', function () {
-            var preview = document.getElementById('profile-photo-preview');
-            var file = this.files[0];
-            var reader = new FileReader();
-            var image = new Image(); // Create a new image element
+        function previewImage(input) {
+            var imagePreview = document.getElementById('image-preview');
+            var uploadText = document.getElementById('upload-text');
 
-            reader.onload = function () {
-                image.src = reader.result; // Set the src attribute of the image element
-                image.classList.add('rounded-circle'); // Add the rounded-circle class
-                preview.innerHTML = ''; // Clear any existing content
-                preview.appendChild(image); // Append the image to the preview container
-                preview.style.display = 'block';
-            };
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            if (file) {
-                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                imagePreview.style.display = 'none';
+                uploadText.style.display = 'block';
             }
-        });
-
-
+        }
     </script>
 
 </body>

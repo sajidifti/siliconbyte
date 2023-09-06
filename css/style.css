@@ -349,46 +349,45 @@ footer {
 /* Scroll to top End */
 
 /* সাইন ইন শুরু */
-
+.custom-form-section{
+  min-height: 60vh;
+}
 .form-title {
   color: #101010;
   margin-bottom: 30px;
   margin: 30px;
 }
 
-/* Style for the file input */
-#profile-photo-input {
-  display: none; /* Hide the file input */
-}
-
-/* Style for the label container */
-.profile-photo-label {
-  display: inline-block;
-  width: 150px; /* Set a width for the clickable area */
-  height: 150px; /* Set a height for the clickable area */
+/* Profile Photo */
+#image-preview-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   cursor: pointer;
-  overflow: hidden;
-  border: 2px solid #ccc;
-  border-radius: 50%; /* Make it circular */
 }
 
-/* Style for the image preview container */
-.profile-photo-preview {
+#image-preview {
+  max-width: none;
+  max-height: none;
+  display: none;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #898989;
+  object-fit: cover;
 }
 
-.profile-photo-div{
-  margin-bottom: 40px;
+#upload-text {
+  display: block;
+  text-align: center;
+  font-size: 14px;
 }
 
-/* Style for the circular image */
-.profile-photo-preview img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 50%; /* Make the image circular */
+#image-preview-wrapper {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
 }
