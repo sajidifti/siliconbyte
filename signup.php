@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if a profile picture is uploaded
             if ($_FILES["profile-picture"]["error"] === 0) {
-                $uploadDir = "uploads/"; // Set your upload directory
+                $uploadDir = "uploads/profile/";
                 $uploadedFileName = $_FILES["profile-picture"]["name"];
                 $uploadedFile = $uploadDir . basename($uploadedFileName);
 
