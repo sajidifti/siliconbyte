@@ -129,7 +129,8 @@ session_start();
                       <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
                         জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
                       <div class="col-lg-3 col-md-3">
-                        <button type="submit" class="btn c_button">আরো পডুন</button>
+                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
+                          href="password_page.php">আরো পড়ুন</a>
                       </div>
                     </div>
 
@@ -155,7 +156,8 @@ session_start();
                       <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
                         জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
                       <div class="col-lg-3 col-md-3">
-                        <button type="submit" class="btn c_button">আরো পডুন</button>
+                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
+                          href="password_page.php">আরো পড়ুন</a>
                       </div>
                     </div>
 
@@ -181,7 +183,8 @@ session_start();
                       <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
                         জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
                       <div class="col-lg-3 col-md-3">
-                        <button type="submit" class="btn c_button">আরো পডুন</button>
+                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
+                          href="password_page.php">আরো পড়ুন</a>
                       </div>
                     </div>
 
@@ -214,149 +217,27 @@ session_start();
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <!-- কার্ড শুরু -->
         <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
+          <a href="details-page.html" class="card-link">
+            <!-- Replace "details-page.html" with the actual URL of your details page -->
+            <div class="card h-100 my-card">
+              <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
+              <div class="card-body">
+                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
+                <p class="card-text">
+                  দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
+                  ফ্ল্যাগশিপ। বলা হচ্ছে
+                  এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
+              </div>
             </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
+          </a>
         </div>
         <!-- কার্ড শেষ -->
       </div>
+
       <!-- Vertical Card Start -->
       <div style="margin-top: 20px;">
         <h2><a href="#" class="latest-link">সর্বশেষ <span style="font-size: 120%;">&gt;</span></a></h2>
@@ -364,201 +245,63 @@ session_start();
       <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
         <!-- Single Card Start -->
         <div class="col-md-6 verticle-card-col">
-          <div class="card mb-3 verticle-card">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                  style="object-fit: cover; width: 100%; height: 100%;">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                  <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি
-                    তাদের ২০২৪ সালের জন্য
-                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                  <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small></p>
+          <a href="details-page.html" class="card-link">
+            <!-- Replace "details-page.html" with the actual URL of your details page -->
+            <div class="card mb-3 verticle-card">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
+                    style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
+                    <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি
+                      তাদের ২০২৪ সালের জন্য
+                      ফ্ল্যাগশিপ। বলা হচ্ছে
+                      এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
+                    <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small></p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <!-- Single Card End -->
-        <!-- Single Card Start -->
-        <div class="col-md-6 verticle-card-col">
-          <div class="card mb-3 verticle-card">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                  style="object-fit: cover; width: 100%; height: 100%;">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                  <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি
-                    তাদের ২০২৪ সালের জন্য
-                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                  <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Single Card End -->
+
       </div>
       <!-- Vertical Card End -->
+
+      <!-- Others -->
       <div style="margin-top: 20px;">
         <h2><a href="#" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
       </div>
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <!-- কার্ড শুরু -->
         <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
+          <a href="details-page.html" class="card-link">
+            <!-- Replace "details-page.html" with the actual URL of your details page -->
+            <div class="card h-100 my-card">
+              <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
+              <div class="card-body">
+                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
+                <p class="card-text">
+                  দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
+                  ফ্ল্যাগশিপ। বলা হচ্ছে
+                  এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
+                </p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
+              </div>
             </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
-        </div>
-        <!-- কার্ড শেষ -->
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <div class="card h-100 my-card">
-            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-            <div class="card-body">
-              <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-              <p class="card-text">
-                দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                ফ্ল্যাগশিপ। বলা হচ্ছে
-                এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-            </div>
-          </div>
+          </a>
         </div>
         <!-- কার্ড শেষ -->
       </div>
       <div class="col-lg-2 col-md-2 container-fluid">
-        <button type="submit" class="btn c_button" style="margin-top: 5rem;">আরো দেখুন</button>
+        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
+          দেখুন</a>
       </div>
 
 

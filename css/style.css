@@ -235,6 +235,12 @@ header {
   /* margin-bottom: 0; */
   padding-top: 12px;
 }
+
+.more-button{
+  width: 100%;
+  text-align: center;
+  padding-top: 12px;
+}
 .c_button:hover {
   color: #010101;
   background-color: #f3fde8;
@@ -282,6 +288,10 @@ footer {
 /* footer end*/
 
 /* Article start*/
+.card-link{
+text-decoration: none;
+}
+
 .my-card {
   transition: transform 0.2s, box-shadow 0.2s;
   background-color: #f3fde8;
@@ -299,6 +309,10 @@ footer {
 
 .card-title {
   color: #313841;
+}
+
+.card-text{
+  color: #898989;
 }
 
 .verticle-card-row {
@@ -320,6 +334,10 @@ footer {
 
 /* Article end*/
 /* Articles.html Start */
+.articles{
+  padding-bottom: 50px;
+}
+
 .latest-link {
   text-decoration: none;
   color: #333;

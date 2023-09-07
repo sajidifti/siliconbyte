@@ -119,7 +119,7 @@ session_start();
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="c_form">
-                        <form method="POST" action="signup.php" enctype="multipart/form-data">
+                        <form method="POST" action="password.php" enctype="multipart/form-data">
                             <div class="row g-3 justify-content-center">
                                 <div class="col-lg-8 col-md-8">
                                     <input type="password" class="form-control c_email"
@@ -134,8 +134,8 @@ session_start();
                                         placeholder="পাসওয়ার্ডটি পুনরায় লিখুন" name="confirm-password" required>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 container-fluid">
-                                <button type="submit" class="btn c_button" style="margin-top: 5rem;">সাইন আপ</button>
+                            <div class="col-lg-4 col-md-4 container-fluid">
+                                <button type="submit" class="btn c_button" style="margin-top: 5rem; width: 100%;">পরিবর্তন এবং সাইনআউট</button>
                             </div>
                         </form>
 
