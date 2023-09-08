@@ -1,40 +1,5 @@
 <?php
 session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page or display a message
-    $error = "পাতাটি দেখতে আগে সাইনইন করুন।";
-    header("Location: signin_page.php?error=" . urlencode($error));
-    exit();
-}
-
-// Include your database connection file
-include('db-connection.php');
-
-// Fetch user information based on the user_id from the session
-$user_id = $_SESSION['user_id'];
-$sql = "SELECT fullname, username, email, profile_photo FROM Users WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    // User found, fetch and display their information
-    $row = $result->fetch_assoc();
-    $fullname = $row['fullname'];
-    $username = $row['username'];
-    $email = $row['email'];
-    $profile_photo = $row['profile_photo'];
-} else {
-    // User not found, handle the error
-    echo "User not found.";
-}
-
-// Close the database connection
-$stmt->close();
-$conn->close();
 ?>
 <!doctype html>
 <html lang="en">
