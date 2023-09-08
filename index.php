@@ -215,27 +215,61 @@ session_start();
   <section class="articles">
     <div class="container">
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <a href="details-page.html" class="card-link">
-            <!-- Replace "details-page.html" with the actual URL of your details page -->
-            <div class="card h-100 my-card">
-              <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-              <div class="card-body">
-                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                <p class="card-text">
-                  দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                  ফ্ল্যাগশিপ। বলা হচ্ছে
-                  এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- কার্ড শেষ -->
+        <?php
+        // Include the database connection file
+        include 'db-connection.php';
+
+        // Query to retrieve all articles
+        $sql = "SELECT * FROM Articles ORDER BY DATETIME DESC"; // You can adjust the ORDER BY clause as needed
+        $result = $conn->query($sql);
+
+        // Check if there are articles
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            // Extract data from the current row
+            $article_id = $row['article_id'];
+            $title = $row['title'];
+            $content = $row['content'];
+            $article_photo = $row['article_photo'];
+            $datetime = $row['DATETIME'];
+
+            // Format the datetime
+            $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+        
+            // Limit the content to 300 characters
+            if (mb_strlen($content, 'UTF-8') > 200) {
+              $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+              $limited_content .= '...'; // Add ellipsis if content is truncated
+            } else {
+              $limited_content = $content;
+            }
+
+            // HTML for the card
+            echo '<div class="col">';
+            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace "details-page.php" with the actual URL of your details page
+            echo '<div class="card h-100 my-card">';
+            echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $title . '</h5>';
+            echo '<p class="card-text">' . $limited_content . '</p>';
+            echo '</div>';
+            echo '<div class="card-footer">';
+            echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+            echo '</div>';
+            echo '</div>';
+            echo '</a>';
+            echo '</div>';
+          }
+        } else {
+          // Handle the case where there are no articles
+          echo 'No articles found.';
+        }
+
+        // Close the database connection
+        $conn->close();
+        ?>
+
+
       </div>
 
       <!-- Vertical Card Start -->

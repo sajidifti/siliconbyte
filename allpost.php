@@ -137,94 +137,11 @@ $conn->close();
     </section>
     <!-- Error message display end -->
 
-    <section class="post">
-        <div class="container mt-4">
-            <h2>Post an Article</h2>
-            <form action="post.php" method="POST" enctype="multipart/form-data">
-                <!-- Article Title -->
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
-                </div>
 
-                <!-- Article Summary -->
-                <div class="mb-3">
-                    <label for="summary" class="form-label">Summary (Max 50 characters)</label>
-                    <textarea class="form-control" id="summary" name="summary" maxlength="50" required></textarea>
-                </div>
-
-                <!-- Article Content -->
-                <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-                </div>
-
-                <!-- Article Photo -->
-                <div class="mb-3">
-                    <label for="photo" class="form-label">Photo</label>
-                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
-                </div>
-
-                <!-- Article Category -->
-                <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
-                    <select class="form-select" id="category" name="category" required>
-                        <option value="smartphone">Smartphone</option>
-                        <option value="pc">PC</option>
-                        <option value="software">Software</option>
-                        <option value="tutorial">Tutorial</option>
-                        <option value="programming">Programming</option>
-                        <option value="gaming">Gaming</option>
-                    </select>
-                </div>
-
-                <!-- Tags -->
-                <!-- Tags -->
-                <div class="mb-3">
-                    <label class="form-label">Tags</label>
-                    <div class="d-flex">
-                        <?php
-                        // Include the database connection file
-                        include 'db-connection.php';
-
-                        // Retrieve tags from the Tags table
-                        $sql = "SELECT * FROM Tags";
-                        $result = $conn->query($sql);
-
-                        // Create five tag select fields
-                        for ($i = 1; $i <= 5; $i++) {
-                            echo '<div class="me-3">';
-                            echo '<label for="tags' . $i . '" class="form-label">Tag ' . $i . '</label>';
-                            echo '<select class="form-select" id="tags' . $i . '" name="tag' . $i . '">'; // Note the name="tag1", "tag2", etc.
-                        
-                            // Populate the select list with options
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<option value="' . $row['tag_id'] . '">' . $row['tag_name'] . '</option>';
-                            }
-
-                            echo '</select>';
-                            echo '</div>';
-
-                            // Reset the result pointer to the beginning for the next select list
-                            $result->data_seek(0);
-                        }
-
-                        // Close the database connection
-                        $conn->close();
-                        ?>
-                    </div>
-                </div>
-
-                <!-- End tag -->
-
-
-
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+    <section>
+        
     </section>
+
 
     <!-- footer start-->
     <footer>

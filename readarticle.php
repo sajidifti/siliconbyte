@@ -143,100 +143,80 @@ $conn->close();
                 <div class="col-md-8">
                     <!-- Main Article Section -->
                     <article>
-                        <h1>Title of the Article</h1>
-                        <p class="lead">Summary of the article goes here.</p>
-                        <img src="images/stock/demo.jpg" alt="Article Photo" class="img-fluid mb-3">
-                        <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-                            debitis voluptas unde minima nobis omnis quisquam molestiae. Possimus rem alias, aspernatur
-                            non eaque, accusantium corporis velit sapiente, incidunt deserunt debitis ipsam veniam
-                            explicabo. Amet accusantium consequuntur quibusdam dolore nostrum rerum ratione iure aliquam
-                            maxime porro atque voluptate perferendis, sunt quasi. Non, earum sunt qui quidem dolores
-                            ullam. Numquam aperiam odit facilis ipsa eos error ratione necessitatibus ea ducimus sequi
-                            molestias explicabo magni, rerum nam distinctio vel quos vero nisi nesciunt iure deserunt
-                            nulla perspiciatis cum. Voluptatibus, adipisci! Voluptas tempora dignissimos et nemo dolore
-                            alias minus quasi odit vel culpa, maxime maiores, non quas nihil officia quod, modi ut.
-                            Molestias sit illum eius. Minus nihil dolorum, eum iusto, ratione vel modi aspernatur, rem
-                            dolores architecto tempore magni explicabo reprehenderit. Mollitia dignissimos odio, illo
-                            adipisci nostrum possimus eos animi! Odio iste dolores et fugit nam soluta recusandae nobis
-                            molestiae ipsam optio suscipit nostrum ullam culpa nulla, cum natus, quidem vel fuga magni
-                            perspiciatis quibusdam. Doloribus, tempora dolores officia, culpa veniam consequuntur ipsum
-                            odit hic iusto ullam voluptates reprehenderit tempore animi recusandae veritatis temporibus
-                            deleniti dolorum deserunt quos. Suscipit, incidunt quidem porro quia molestiae facere
-                            similique ea! Impedit, dicta tenetur architecto sapiente voluptatibus mollitia placeat minus
-                            nostrum, molestiae iure numquam corporis temporibus suscipit iusto, nulla laboriosam eaque.
-                            Saepe perferendis recusandae quia explicabo quod sapiente maiores iste obcaecati corrupti
-                            non vitae, cupiditate quos rem magni dignissimos ab placeat excepturi aspernatur cumque est
-                            sunt expedita autem fuga ea! Facilis, doloribus nulla hic suscipit omnis culpa libero iste
-                            dolor odit dolore nesciunt perspiciatis esse id minima pariatur nisi quisquam aperiam
-                            tempore accusantium quam quod. Exercitationem adipisci nesciunt laudantium cum itaque rerum
-                            sit porro. Veritatis eius consectetur harum molestias magnam eveniet nesciunt consequatur
-                            dolorem porro eligendi voluptatem eos illo sapiente minima labore tenetur necessitatibus
-                            minus deserunt autem amet quam, perferendis beatae. Necessitatibus delectus, id, suscipit
-                            molestias nesciunt culpa, adipisci nobis numquam aspernatur tempora eius tempore quibusdam
-                            eligendi reprehenderit natus quaerat sunt sapiente repellat! Magnam laudantium cumque et
-                            tenetur quos sint quisquam quo enim, voluptatum, ipsam pariatur numquam esse quibusdam
-                            ducimus impedit ullam rem, facilis maiores natus? Architecto iusto eveniet consectetur
-                            similique nulla delectus laudantium quasi tenetur dolorum velit molestias minus dolorem
-                            assumenda provident dolor, ad alias vitae voluptas. Neque labore quo vel explicabo nulla
-                            amet voluptatibus beatae corrupti non aut esse sint quidem, impedit voluptatem! Repellendus
-                            tenetur nostrum explicabo facilis qui suscipit, error dolores voluptatum vel placeat?
-                            Quidem, aperiam minima quos asperiores repellat obcaecati eos consectetur blanditiis
-                            accusantium perferendis doloribus accusamus voluptatem eius id quae dolore aliquam
-                            reprehenderit, similique exercitationem distinctio voluptate quibusdam assumenda ipsum? Quod
-                            reiciendis tenetur, dolores distinctio vero ipsum nemo voluptatem quidem ut velit facilis
-                            voluptatum doloremque accusamus inventore voluptate id asperiores sint consequatur tempora,
-                            ad commodi eum. Doloribus ipsa dolor, beatae excepturi cumque molestiae commodi eius dicta
-                            neque? Praesentium consequatur ullam cum, ipsa dolorum quaerat officiis, natus hic et porro
-                            perferendis consequuntur itaque eius explicabo quibusdam. Porro consectetur sed nesciunt,
-                            amet quam quasi autem molestiae non nam velit. Harum recusandae architecto hic, officiis
-                            dolorum dolore. Dicta cum omnis iusto? Natus inventore nihil veritatis iusto earum
-                            voluptatibus, rerum, ipsum consectetur quae qui consequuntur aliquam totam distinctio. Ea
-                            enim quia beatae voluptas incidunt delectus nemo dolores! Facilis voluptatem perferendis
-                            labore atque? Alias magnam cumque tenetur dolorem vero officia possimus obcaecati ex ipsum
-                            animi laboriosam nam officiis quis mollitia repellendus suscipit sit soluta veritatis,
-                            labore nihil, perferendis aliquid? Fugit, pariatur facere autem dolor, quia debitis
-                            corrupti, ut minima molestias deleniti id eos corporis nam porro quas minus voluptatibus
-                            officia assumenda. Voluptatibus dignissimos iusto vel rerum incidunt unde facilis
-                            praesentium corporis facere quidem corrupti aliquam ut eveniet iure ipsam, consectetur
-                            consequatur at et? Dolor sint molestiae dolorum error mollitia aliquid nemo praesentium quas
-                            ut. Ab tempora nemo explicabo perferendis nisi repudiandae laboriosam beatae nulla vero
-                            veritatis, totam rerum saepe iure accusamus odit maiores sunt officia voluptas eius
-                            inventore! Eligendi quos necessitatibus deleniti rem? Molestias nostrum ducimus nam tempora
-                            iusto? Dolorum, molestiae ipsum odit error officia assumenda harum iusto dolor laudantium
-                            non soluta eveniet? Nulla dolore id nobis accusamus consequatur natus deserunt, atque
-                            voluptatem nihil porro modi eaque corporis quas rem culpa quos delectus dolorum libero eius
-                            quaerat temporibus laborum accusantium, veniam sapiente. Incidunt, repellendus officiis.
-                            Nostrum hic error earum aperiam, distinctio eum ad reiciendis ullam fuga. Deleniti quidem
-                            reprehenderit ut dicta aut iusto laudantium doloribus omnis pariatur veritatis optio
-                            sapiente autem, eius esse, totam accusantium voluptatem! Quidem quis tenetur quae asperiores
-                            vero fuga quo totam at nemo! Expedita minima iusto minus quam necessitatibus non provident
-                            laboriosam, aperiam veritatis totam distinctio, nisi mollitia ipsa quasi molestiae id, omnis
-                            qui ipsam unde aliquam illum! Asperiores, unde numquam, repellat itaque beatae inventore
-                            tempora quasi, ipsum similique quisquam id perferendis neque nulla veniam necessitatibus
-                            dolorum? Dicta, autem. Ullam ea molestiae nisi autem porro? Architecto, repudiandae
-                            repellendus animi, aspernatur explicabo, earum eligendi perspiciatis quos harum molestias
-                            tempore minus! Eum neque esse quod est eos tempora modi cumque ipsam ducimus id? Similique
-                            porro nam esse blanditiis? Iure iste, esse fugit voluptate neque exercitationem inventore
-                            non harum. Vero est culpa nam, impedit, animi laboriosam expedita repellendus ut quam quidem
-                            labore possimus quaerat distinctio. Ut nam doloribus recusandae deserunt architecto, quas
-                            illum magnam praesentium dicta possimus impedit, sint labore tempore illo corrupti quod
-                            fugiat enim modi culpa similique? Alias inventore aperiam ipsum et itaque, autem error
-                            velit? Debitis dolore animi vitae velit alias aperiam eos possimus inventore, iusto
-                            consequuntur repellat sed architecto dolorem assumenda nostrum omnis esse provident nemo
-                            quia doloribus! Mollitia sint at molestias eveniet esse! Eveniet unde nemo voluptatem
-                            quaerat repellat mollitia, distinctio magni fuga. Incidunt ratione nobis velit inventore
-                            omnis laudantium ducimus cumque accusamus ipsam assumenda porro unde sequi accusantium a
-                            dolore alias iste at totam qui recusandae sit possimus, voluptatibus fugit adipisci. Eius
-                            architecto non natus hic eum! Voluptatum, explicabo deserunt itaque corrupti nesciunt
-                            similique iste ea dolorum ipsa impedit error animi molestias temporibus et optio omnis odio?
-                            Inventore, ullam magnam vel quaerat quae vitae officia facilis modi dolorum id laboriosam
-                            aliquam nostrum ut possimus minus accusamus? Aliquam natus delectus est.</p>
+                        <?php
+                        // Include the database connection file
+                        include 'db-connection.php';
+
+                        // Check if article_id is provided in the URL
+                        if (isset($_GET['article_id'])) {
+                            $article_id = $_GET['article_id'];
+
+                            // Query to retrieve the article by article_id
+                            $sql = "SELECT * FROM Articles WHERE article_id = ?";
+                            if ($stmt = $conn->prepare($sql)) {
+                                $stmt->bind_param("i", $article_id);
+                                if ($stmt->execute()) {
+                                    $result = $stmt->get_result();
+
+                                    // Check if the article exists
+                                    if ($result->num_rows === 1) {
+                                        $row = $result->fetch_assoc();
+                                        $title = $row['title'];
+                                        $summary = $row['summary'];
+                                        $content = $row['content'];
+                                        $article_photo = $row['article_photo'];
+                                        $datetime = $row['DATETIME'];
+                                        $user_id = $row['user_id'];
+
+                                        // Format the datetime
+                                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                        
+                                        // Query to retrieve the author's name from the users table
+                                        $author_query = "SELECT fullname FROM users WHERE user_id = ?";
+                                        if ($stmt_author = $conn->prepare($author_query)) {
+                                            $stmt_author->bind_param("i", $user_id);
+                                            if ($stmt_author->execute()) {
+                                                $author_result = $stmt_author->get_result();
+                                                $author_row = $author_result->fetch_assoc();
+                                                $author = $author_row['fullname'];
+
+                                                // Display the article details
+                                                echo '<h1 class="article-title">' . $title . '</h1>';
+                                                echo '<p class="lead">' . $summary . '</p>';
+                                                echo '<p class="article-published"><small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small></p>';
+                                                echo '<p class="article-published"><small class="text-muted">লিখেছেন ' . $author . '</small></p>';
+                                                echo '<img src="' . $article_photo . '" alt="Article Photo" class="img-fluid mb-3 article-photo">';
+                                                echo '<p class="article-body">' . $content . '</p>';
+                                            } else {
+                                                echo 'Error retrieving author information.';
+                                            }
+                                            $stmt_author->close();
+                                        } else {
+                                            echo 'Error preparing author query.';
+                                        }
+                                    } else {
+                                        echo 'Article not found.';
+                                    }
+                                } else {
+                                    echo 'Error executing query.';
+                                }
+                            } else {
+                                echo 'Error preparing query.';
+                            }
+
+                            // Close the database connection
+                            $stmt->close();
+                            $conn->close();
+                        } else {
+                            echo 'Invalid article ID.';
+                        }
+                        ?>
                     </article>
                 </div>
                 <div class="col-md-4">
                     <!-- Related Articles Section -->
                     <div class="mb-4">
-                        <h2>Related Articles</h2>
+                        <h2 class="related-articles">Related Articles</h2>
                     </div>
 
                     <!-- Single Card Start -->
@@ -291,6 +271,87 @@ $conn->close();
                     <!-- Add more related articles as needed -->
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="tags category">
+                        <?php
+                        // Include the database connection file
+                        include 'db-connection.php';
+
+                        // Check if article_id is provided in the URL
+                        if (isset($_GET['article_id'])) {
+                            $article_id = $_GET['article_id'];
+
+                            // Query to increment the views count of the article
+                            $increment_views_query = "UPDATE Articles SET views = views + 1 WHERE article_id = ?";
+                            if ($stmt_increment_views = $conn->prepare($increment_views_query)) {
+                                $stmt_increment_views->bind_param("i", $article_id);
+                                if ($stmt_increment_views->execute()) {
+                                    // Views count incremented successfully
+                                    // You can display a success message if needed
+                                } else {
+                                    echo 'Error incrementing views count.';
+                                }
+                                $stmt_increment_views->close();
+                            } else {
+                                echo 'Error preparing increment views query.';
+                            }
+                            // Query to retrieve the category of the article
+                            $category_query = "SELECT category FROM Articles WHERE article_id = ?";
+                            if ($stmt_category = $conn->prepare($category_query)) {
+                                $stmt_category->bind_param("i", $article_id);
+                                if ($stmt_category->execute()) {
+                                    $category_result = $stmt_category->get_result();
+                                    $category_row = $category_result->fetch_assoc();
+                                    $category = $category_row['category'];
+
+                                    // Display the category
+                                    echo '<a href="#">' . $category . '</a>';
+                                } else {
+                                    echo 'Error retrieving category information.';
+                                }
+                                $stmt_category->close();
+                            } else {
+                                echo 'Error preparing category query.';
+                            }
+
+                            // Query to retrieve the tags associated with the article
+                            $tags_query = "SELECT T.tag_name FROM Tags AS T
+                                INNER JOIN Article_Tags AS AT ON T.tag_id = AT.tag_id
+                                WHERE AT.article_id = ?";
+                            if ($stmt_tags = $conn->prepare($tags_query)) {
+                                $stmt_tags->bind_param("i", $article_id);
+                                if ($stmt_tags->execute()) {
+                                    $tags_result = $stmt_tags->get_result();
+
+                                    // Display the tags
+                                    echo '<div class="col">';
+                                    echo '<div class="tags">';
+                                    while ($tag_row = $tags_result->fetch_assoc()) {
+                                        $tag_name = $tag_row['tag_name'];
+                                        echo '<a href="#">' . $tag_name . '</a>';
+                                    }
+                                    echo '</div>';
+                                    echo '</div>';
+                                } else {
+                                    echo 'Error retrieving tags information.';
+                                }
+                                $stmt_tags->close();
+                            } else {
+                                echo 'Error preparing tags query.';
+                            }
+                        } else {
+                            echo 'Invalid article ID.';
+                        }
+
+                        // Close the database connection
+                        $conn->close();
+                        ?>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 

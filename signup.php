@@ -89,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 // Registration successful, redirect to a success page or login page
-                // Registration successful, set the success message
                 $success = "নিবন্ধন সফল হয়েছে। সাইনইন করুন।";
 
                 // Redirect to signin_page.php with the success message

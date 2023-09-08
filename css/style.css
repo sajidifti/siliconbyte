@@ -236,7 +236,7 @@ header {
   padding-top: 12px;
 }
 
-.more-button{
+.more-button {
   width: 100%;
   text-align: center;
   padding-top: 12px;
@@ -288,8 +288,8 @@ footer {
 /* footer end*/
 
 /* Article start*/
-.card-link{
-text-decoration: none;
+.card-link {
+  text-decoration: none;
 }
 
 .my-card {
@@ -311,7 +311,7 @@ text-decoration: none;
   color: #313841;
 }
 
-.card-text{
+.card-text {
   color: #898989;
 }
 
@@ -334,7 +334,7 @@ text-decoration: none;
 
 /* Article end*/
 /* Articles.html Start */
-.articles{
+.articles {
   padding-bottom: 50px;
 }
 
@@ -433,3 +433,40 @@ text-decoration: none;
 }
 
 /* Profile.html End */
+
+/* Readarticle.html start */
+.article-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #010101;
+}
+
+.article-body{
+  margin-top: 10px;
+  text-align: justify;
+  color: #010101;
+  font-size: larger;
+}
+
+.related-articles{
+  color: #010101;
+}
+
+.tags{
+  margin-top: 20px;
+}
+
+.tags a{
+  text-decoration: none;
+  color: #101010;
+  background-color: #afb8a5;
+  padding: 5px;
+  border-radius: 3px;
+  border: 2px solid #afb8a5;
+  transition: 0.3s;
+  margin: 2px;
+}
+
+.tags a:hover{
+  background-color: #f3fde8;
+}
