@@ -233,398 +233,793 @@ session_start();
         <div class="container">
             <!-- Vertical Card Start -->
             <div style="margin-top: 20px;" id="smartphone">
-                <h2><a href="category.php" class="latest-link">মুঠোফোন <span style="font-size: 120%;">&gt;</span></a></h2>
+                <h2><a href="category.php?category=smartphone" class="latest-link">মুঠোফোন <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'smartphone';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
+
+                // Define the category you want to query
+                $category = "smartphone";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
-            </div>
+
         </div>
+
+        <!-- Second category pc -->
         <div class="container">
             <!-- Vertical Card Start -->
             <div style="margin-top: 20px;" id="pc">
-                <h2><a href="#" class="latest-link">কম্পিউটার <span style="font-size: 120%;">&gt;</span></a></h2>
+                <h2><a href="category.php?category=pc" class="latest-link">কম্পিউটার <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'pc';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
+
+                // Define the category you want to query
+                $category = "pc";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
-            </div>
+
         </div>
         <div class="container">
             <!-- Vertical Card Start -->
-            <div style="margin-top: 20px;" id="game">
-                <h2><a href="#" class="latest-link">ভিডিও গেম <span style="font-size: 120%;">&gt;</span></a></h2>
+            <div style="margin-top: 20px;" id="gaming">
+                <h2><a href="category.php?category=gaming" class="latest-link">ভিডিও গেম <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'gaming';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
+
+                // Define the category you want to query
+                $category = "gaming";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
-            </div>
+
         </div>
         <div class="container">
             <!-- Vertical Card Start -->
             <div style="margin-top: 20px;" id="tutorial">
-                <h2><a href="#" class="latest-link">টিউটোরিয়াল <span style="font-size: 120%;">&gt;</span></a></h2>
+                <h2><a href="category.php?category=tutorial" class="latest-link">টিউটোরিয়াল <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'tutorial';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
+
+                // Define the category you want to query
+                $category = "tutorial";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
-            </div>
+
         </div>
         <div class="container">
             <!-- Vertical Card Start -->
             <div style="margin-top: 20px;" id="software">
-                <h2><a href="#" class="latest-link">সফটওয়্যার <span style="font-size: 120%;">&gt;</span></a></h2>
+                <h2><a href="category.php?category=software" class="latest-link">সফটওয়্যার <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'software';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
-            </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
+
+                // Define the category you want to query
+                $category = "software";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
         </div>
         <div class="container">
             <!-- Vertical Card Start -->
             <div style="margin-top: 20px;" id="programing">
-                <h2><a href="#" class="latest-link">প্রোগ্রামিং <span style="font-size: 120%;">&gt;</span></a></h2>
+                <h2><a href="category.php?category=programing" class="latest-link">প্রোগ্রামিং <span
+                            style="font-size: 120%;">&gt;</span></a></h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-                <!-- Single Card Start -->
-                <div class="col-md-6 verticle-card-col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card mb-3 verticle-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                        style="object-fit: cover; width: 100%; height: 100%;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                        <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে।
-                                            যার নাম এস২৪। এটি
-                                            তাদের ২০২৪ সালের জন্য
-                                            ফ্ল্যাগশিপ। বলা হচ্ছে
-                                            এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                                        <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                <?php
+                include('db-connection.php'); // Include the database connection file
+                
+                // Define the category you want to query
+                $category = 'programing';
+
+                // Query the database
+                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          WHERE category = ?
+          LIMIT 2";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Loop through the results and create cards
+                while ($row = $result->fetch_assoc()) {
+                    // Extract data from the row
+                    $articleId = $row['article_id'];
+                    $title = $row['title'];
+                    $truncatedContent = $row['truncated_content'];
+                    $datePublished = $row['DATETIME'];
+                    $imageSrc = $row['article_photo'];
+
+                    // Output the card HTML with dynamic data
+                    echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
                         </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- Single Card End -->
+            </div>
+        </a>
+    </div>
+    <!-- Single Card End -->';
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
             <!-- Vertical Card End -->
             <!-- Horizontal Card -->
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- কার্ড শুরু -->
-                <div class="col">
-                    <a href="details-page.html" class="card-link">
-                        <!-- Replace "details-page.html" with the actual URL of your details page -->
-                        <div class="card h-100 my-card">
-                            <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-                            <div class="card-body">
-                                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                <p class="card-text">
-                                    দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের
-                                    ২০২৪ সালের জন্য
-                                    ফ্ল্যাগশিপ। বলা হচ্ছে
-                                    এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- কার্ড শেষ -->
-            </div>
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
 
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
+                // Define the category you want to query
+                $category = "programing";
+
+                // Calculate the offset for pagination
+                $limit = 4;
+                $offset = 2;
+                $offset_value = $offset * $limit;
+
+                // Query to retrieve articles from the specified category with pagination
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // Check if there are articles
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Extract data from the current row
+                        $article_id = $row['article_id'];
+                        $title = $row['title'];
+                        $content = $row['content'];
+                        $article_photo = $row['article_photo'];
+                        $datetime = $row['DATETIME'];
+
+                        // Format the datetime
+                        $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+                
+                        // Limit the content to 200 characters
+                        if (mb_strlen($content, 'UTF-8') > 200) {
+                            $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                            $limited_content .= '...'; // Add ellipsis if content is truncated
+                        } else {
+                            $limited_content = $content;
+                        }
+
+                        // HTML for the card
+                        echo '<div class="col">';
+                        echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">';
+                        echo '<div class="card h-100 my-card">';
+                        echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $title . '</h5>';
+                        echo '<p class="card-text">' . $limited_content . '</p>';
+                        echo '</div>';
+                        echo '<div class="card-footer">';
+                        echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</a>';
+                        echo '</div>';
+                    }
+                }
+
+                // Close the database connection
+                $stmt->close();
+                $conn->close();
+                ?>
+
             </div>
         </div>
     </section>

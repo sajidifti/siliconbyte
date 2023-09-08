@@ -171,7 +171,49 @@ session_start();
 
                             // Close the database connection
                             $stmt->close();
+
+                            // Start Increase User Category and Tag Read Count
+                        
+
+                            // Check if the user is logged in and has a valid session
+                            if (isset($_SESSION['user_id'])) {
+                                // Get the user_id from the session
+                                $user_id = $_SESSION['user_id'];
+
+                                // Check if article_id is provided in the URL
+                                if (isset($_GET['article_id'])) {
+                                    $article_id = $_GET['article_id'];
+
+                                    // Query to get the category of the article
+                                    $get_category_query = "SELECT category FROM Articles WHERE article_id = ?";
+                                    if ($stmt_get_category = $conn->prepare($get_category_query)) {
+                                        $stmt_get_category->bind_param("i", $article_id);
+                                        $stmt_get_category->execute();
+                                        $stmt_get_category->bind_result($category);
+                                        $stmt_get_category->fetch();
+                                        $stmt_get_category->close(); // Close this statement
+                        
+                                        if (!empty($category)) {
+                                            // Increment the read count for the category in User_Category_Read_Count table
+                                            $increment_category_read_query = "INSERT INTO User_Category_Read_Count (user_id, category, read_count) 
+                    VALUES (?, ?, 1) 
+                    ON DUPLICATE KEY UPDATE read_count = read_count + 1";
+                                            if ($stmt_increment_category_read = $conn->prepare($increment_category_read_query)) {
+                                                $stmt_increment_category_read->bind_param("is", $user_id, $category);
+                                                $stmt_increment_category_read->execute();
+                                                $stmt_increment_category_read->close(); // Close this statement
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Close the database connection here (if necessary)
                             $conn->close();
+
+
+
+                            // End Increase User Category and Tag Read Count
                         } else {
                             echo 'Invalid article ID.';
                         }
@@ -237,6 +279,8 @@ session_start();
                 </div>
             </div>
 
+
+            <!-- Show category and tags -->
             <div class="row">
                 <div class="col">
                     <div class="tags category">
@@ -396,3 +440,54 @@ session_start();
 </body>
 
 </html>
+
+<?php
+// Include the database connection file
+include 'db-connection.php';
+
+// Check if the user is logged in and has a valid session
+if (isset($_SESSION['user_id'])) {
+    // Get the user_id from the session
+    $user_id = $_SESSION['user_id'];
+
+    // Check if article_id is provided in the URL
+    if (isset($_GET['article_id'])) {
+        $article_id = $_GET['article_id'];
+
+        // Query to get the tags associated with the article
+        $get_tags_query = "SELECT tag_id FROM Article_Tags WHERE article_id = ?";
+        if ($stmt_get_tags = $conn->prepare($get_tags_query)) {
+            $stmt_get_tags->bind_param("i", $article_id);
+
+            if ($stmt_get_tags->execute()) {
+
+                // $stmt_get_tags->bind_result($tag_id);
+                $get_tag_ids_result = $stmt_get_tags->get_result();
+            }
+
+            // Increment the read count for each tag in User_Tag_Read_Count table
+            $increment_tag_read_query = "INSERT INTO User_Tag_Read_Count (user_id, tag_id, read_count) 
+                VALUES (?, ?, 1) 
+                ON DUPLICATE KEY UPDATE read_count = read_count + 1";
+
+            if ($stmt_increment_tag_read = $conn->prepare($increment_tag_read_query)) {
+
+                while ($tag_row = $get_tag_ids_result->fetch_assoc()) {
+                    $tag_id_r = $tag_row['tag_id'];
+                    $stmt_increment_tag_read->bind_param("ii", $user_id, $tag_id_r);
+                    $stmt_increment_tag_read->execute();
+                }
+
+                // Close the $stmt_increment_tag_read statement after the loop
+                $stmt_increment_tag_read->close();
+            }
+
+            // Close the $stmt_get_tags statement
+            $stmt_get_tags->close();
+        }
+    }
+}
+
+// Close the database connection here (if necessary)
+$conn->close();
+?>
