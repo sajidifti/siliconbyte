@@ -213,10 +213,7 @@ ORDER BY A.DATETIME DESC"; // Adjust the ORDER BY clause as needed
                 ?>
 
             </div>
-            <div class="col-lg-2 col-md-2 container-fluid">
-                <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
-                    দেখুন</a>
-            </div>
+
         </div>
     </section>
     <!-- contact end-->

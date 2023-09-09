@@ -92,7 +92,7 @@ $conn->close();
                                     </li>
                                 <?php endif; ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="profile.php">প্রোফাইল</a>
+                                    <a class="nav-link active-link" href="profile.php">প্রোফাইল</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="signout.php">সাইনআউট</a>
@@ -185,11 +185,15 @@ $conn->close();
                                         value="<?php echo $email; ?>">
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-5 container-fluid">
+                            <div class="col-lg-7 col-md-7 container-fluid">
                                 <div class="button-container">
-                                    <a type="submit" class="btn c_button alt-button"
-                                        style="margin-top: 5rem;" href="password_page.php">পাসওয়ার্ড
+                                    <a type="submit" class="btn c_button alt-button" style="margin-top: 5rem;"
+                                        href="password_page.php">পাসওয়ার্ড
                                         পরিবর্তন</a>
+                                    <?php if ($_SESSION['role'] == "writer"): ?>
+                                        <a type="submit" class="btn c_button alt-button" style="margin-top: 5rem;"
+                                            href="allpost.php">সব খবর</a>
+                                    <?php endif; ?>
                                     <button type="submit" class="btn c_button" style="margin-top: 5rem;">তথ্য
                                         সংরক্ষণ</button>
                                 </div>

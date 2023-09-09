@@ -40,7 +40,7 @@ session_start();
           <div class="collapse navbar-collapse menu" id="nav_c">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="index.php">হোম</a>
+                <a class="nav-link active-link" href="index.php">হোম</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="articles.php">সব খবর</a>
@@ -220,7 +220,7 @@ LIMIT 12
             $result = $stmt->get_result();
           } else {
             // Handle the prepared statement error here
-            echo "Error: " . $conn->error;
+            echo "Error: ";
           }
         } else {
           // Query to retrieve all articles
@@ -273,9 +273,59 @@ LIMIT 12
             echo '</a>';
             echo '</div>';
           }
-        } else {
-          // Handle the case where there are no articles
-          echo 'No articles found.';
+        } else{
+          // Query to retrieve all articles
+          $sql = "SELECT *
+                    FROM (
+                        SELECT *
+                        FROM Articles
+                        ORDER BY DATETIME DESC
+                        LIMIT 12
+                    ) AS subquery
+                    ORDER BY views DESC";
+
+          $result = $conn->query($sql);
+
+          // Check if there are articles
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              // Extract data from the current row
+              $article_id = $row['article_id'];
+              $title = $row['title'];
+              $content = $row['content'];
+              $article_photo = $row['article_photo'];
+              $datetime = $row['DATETIME'];
+
+              // Format the datetime
+              $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+        
+              // Limit the content to 200 characters
+              if (mb_strlen($content, 'UTF-8') > 200) {
+                $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                $limited_content .= '...'; // Add ellipsis if content is truncated
+              } else {
+                $limited_content = $content;
+              }
+
+              // HTML for the card
+              echo '<div class="col">';
+              echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+              echo '<div class="card h-100 my-card">';
+              echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+              echo '<div class="card-body">';
+              echo '<h5 class="card-title">' . $title . '</h5>';
+              echo '<p class="card-text">' . $limited_content . '</p>';
+              echo '</div>';
+              echo '<div class="card-footer">';
+              echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+              echo '</div>';
+              echo '</div>';
+              echo '</a>';
+              echo '</div>';
+            }
+          }
+
+
         }
 
         // Close the database connection
@@ -288,7 +338,7 @@ LIMIT 12
 
       <!-- Vertical Card Start -->
       <div style="margin-top: 20px;">
-        <h2><a href="#" class="latest-link">সর্বশেষ <span style="font-size: 120%;">&gt;</span></a></h2>
+        <h2><a href="articles.php" class="latest-link">সর্বশেষ <span style="font-size: 120%;">&gt;</span></a></h2>
       </div>
       <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
         <?php
@@ -351,7 +401,7 @@ LIMIT 12
 
       <!-- Others -->
       <div style="margin-top: 20px;">
-        <h2><a href="#" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
+        <h2><a href="articles.php" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
       </div>
       <div class="row row-cols-1 row-cols-md-4 g-4">
         <?php
@@ -435,7 +485,56 @@ LIMIT 8
           }
         } else {
           // Handle the case where there are no articles
-          echo 'No articles found.';
+          // Query to retrieve all articles
+          $sql = "SELECT *
+                    FROM (
+                        SELECT *
+                        FROM Articles
+                        ORDER BY DATETIME DESC
+                        LIMIT 8
+                    ) AS subquery
+                    ORDER BY views ASC";
+
+          $result = $conn->query($sql);
+
+          // Check if there are articles
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              // Extract data from the current row
+              $article_id = $row['article_id'];
+              $title = $row['title'];
+              $content = $row['content'];
+              $article_photo = $row['article_photo'];
+              $datetime = $row['DATETIME'];
+
+              // Format the datetime
+              $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+        
+              // Limit the content to 200 characters
+              if (mb_strlen($content, 'UTF-8') > 200) {
+                $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+                $limited_content .= '...'; // Add ellipsis if content is truncated
+              } else {
+                $limited_content = $content;
+              }
+
+              // HTML for the card
+              echo '<div class="col">';
+              echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+              echo '<div class="card h-100 my-card">';
+              echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+              echo '<div class="card-body">';
+              echo '<h5 class="card-title">' . $title . '</h5>';
+              echo '<p class="card-text">' . $limited_content . '</p>';
+              echo '</div>';
+              echo '<div class="card-footer">';
+              echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+              echo '</div>';
+              echo '</div>';
+              echo '</a>';
+              echo '</div>';
+            }
+          }
         }
 
         // Close the database connection
@@ -603,11 +702,11 @@ LIMIT 8
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="c_form">
-            <form action="#">
+            <form method="POST" action="contact.php">
 
               <div class="row g-3 justify-content-center">
                 <div class="col-lg-8 col-md-8">
-                  <input type="email" class="form-control c_email" placeholder="আপনার ইমেইল ঠিকানাটি লিখুন">
+                  <input type="email" class="form-control c_email" placeholder="আপনার ইমেইল ঠিকানাটি লিখুন" name="email">
                 </div>
 
                 <div class="col-lg-2 col-md-2">
@@ -712,3 +811,23 @@ LIMIT 8
 </body>
 
 </html>
+
+<?php
+
+// Include the database connection file
+include 'db-connection.php'; // Assuming your database connection code is in this file
+
+// Get the visitor's IP address
+$ip_address = $_SERVER['REMOTE_ADDR'];
+
+// Insert the visit record into the database
+$insert_query = "INSERT INTO Visits (ip_address) VALUES (?)";
+$stmt = $conn->prepare($insert_query);
+$stmt->bind_param("s", $ip_address);
+$stmt->execute();
+$stmt->close();
+
+// Close the database connection
+$conn->close();
+
+?>

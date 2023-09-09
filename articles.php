@@ -43,7 +43,7 @@ session_start();
                                 <a class="nav-link" href="index.php">হোম</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="articles.php">সব খবর</a>
+                                <a class="nav-link active-link" href="articles.php">সব খবর</a>
                             </li>
                             <?php if (isset($_SESSION['user_id'])): ?>
                                 <?php if ($_SESSION['role'] == "writer"): ?>

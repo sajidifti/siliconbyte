@@ -36,17 +36,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["role"] = $dbRole;
             $_SESSION["email"] = $dbEmail;
 
+            // Close the first prepared statement
+            $stmt->close();
+
             // When a user logs in
             $event_type = "signin";
             $event_description = "User with ID " . $user_id . " signed in.";
             $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
-            $stmt = $conn->prepare($insert_query);
-            $stmt->bind_param("ss", $event_type, $event_description);
-            $stmt->execute();
-            $stmt->close();
+            $stmt2 = $conn->prepare($insert_query);
+            $stmt2->bind_param("ss", $event_type, $event_description);
+            $stmt2->execute();
+            $stmt2->close();
 
             // Similar logic for other events like signup, post creation, etc.
-
 
             header("Location: index.php");
             exit();
@@ -59,8 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "ইউজারনেম অথবা পাসওয়ার্ড সঠিক নয়।";
     }
 
-    // Close the statement
-    $stmt->close();
+    // Close the first prepared statement (if not already closed due to successful login)
+    if ($stmt) {
+        $stmt->close();
+    }
 }
 
 // Redirect to signin_page.php with the error message as a URL parameter

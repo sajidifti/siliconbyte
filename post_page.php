@@ -83,7 +83,7 @@ $conn->close();
                             <?php if (isset($_SESSION['user_id'])): ?>
                                 <?php if ($_SESSION['role'] == "writer"): ?>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="post_page.php">লিখুন</a>
+                                        <a class="nav-link active-link" href="post_page.php">লিখুন</a>
                                     </li>
                                 <?php endif; ?>
                                 <?php if ($_SESSION['role'] == "admin"): ?>
@@ -139,35 +139,38 @@ $conn->close();
 
     <section class="post">
         <div class="container mt-4">
-            <h2>Post an Article</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="c_title text-center">
+                        <h1 class="c_h1 yellow form-title">প্রতিবেদন লিখুন</h1>
+                        <p class="c_p ash">শিরোনাম, সারাংশ, বর্ণনা, ও ছবি দিয়ে খবর প্রকাশ করুন</p>
+                    </div>
+                </div>
+            </div>
             <form action="post.php" method="POST" enctype="multipart/form-data">
                 <!-- Article Title -->
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" class="form-control" id="title" name="title" required placeholder="শিরোনাম">
                 </div>
 
                 <!-- Article Summary -->
                 <div class="mb-3">
-                    <label for="summary" class="form-label">Summary (Max 50 characters)</label>
-                    <textarea class="form-control" id="summary" name="summary" maxlength="50" required></textarea>
+                    <textarea class="form-control" id="summary" name="summary" maxlength="50" required placeholder="সারাংশ (৫০ অক্ষরের মধ্যে)"></textarea>
                 </div>
 
                 <!-- Article Content -->
                 <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="5" required placeholder="বর্ণনা"></textarea>
                 </div>
 
                 <!-- Article Photo -->
                 <div class="mb-3">
-                    <label for="photo" class="form-label">Photo</label>
-                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required placeholder="ছবি">
                 </div>
 
                 <!-- Article Category -->
                 <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
+                    <label for="category" class="form-label">বিভাগ</label>
                     <select class="form-select" id="category" name="category" required>
                         <option value="smartphone">Smartphone</option>
                         <option value="pc">PC</option>
@@ -181,7 +184,7 @@ $conn->close();
                 <!-- Tags -->
                 <!-- Tags -->
                 <div class="mb-3">
-                    <label class="form-label">Tags</label>
+                    <label class="form-label">ট্যাগসমূহ</label>
                     <div class="d-flex">
                         <?php
                         // Include the database connection file
@@ -194,7 +197,7 @@ $conn->close();
                         // Create five tag select fields
                         for ($i = 1; $i <= 5; $i++) {
                             echo '<div class="me-3">';
-                            echo '<label for="tags' . $i . '" class="form-label">Tag ' . $i . '</label>';
+                            echo '<label for="tags' . $i . '" class="form-label">ট্যাগ ' . $i . '</label>';
                             echo '<select class="form-select" id="tags' . $i . '" name="tag' . $i . '">'; // Note the name="tag1", "tag2", etc.
                         
                             // Populate the select list with options

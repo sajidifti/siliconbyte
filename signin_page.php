@@ -67,7 +67,7 @@ session_start();
                                     <a class="nav-link" href="signup_page.php">সাইনআপ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="signin_page.php">সাইনইন</a>
+                                    <a class="nav-link active-link" href="signin_page.php">সাইনইন</a>
                                 </li>
                             <?php endif; ?>
     

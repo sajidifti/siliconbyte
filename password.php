@@ -46,6 +46,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Password updated successfully
                     $success = "পাসওয়ার্ড পরিবর্তন সফল হয়েছে। সাইনইন করুন।";
 
+                    $user_id = $_SESSION['user_id'];
+                    // When a user logs in
+                    $event_type = "change password";
+                    $event_description = "User with ID " . $user_id . " changed password.";
+                    $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                    $stmt2 = $conn->prepare($insert_query);
+                    $stmt2->bind_param("ss", $event_type, $event_description);
+                    $stmt2->execute();
+                    $stmt2->close();
+
+                    // Similar logic for other events like signup, post creation, etc.
+
+
                     header("Location: signout.php?success=" . urlencode($success));
                 } else {
                     $error = "পাসওয়ার্ড পরিবর্তন সফল হয়নি। আবার চেষ্টা করুন।\n" . $updateStmt->error;

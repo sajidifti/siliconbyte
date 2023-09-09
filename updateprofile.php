@@ -36,6 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 // User information updated successfully
+
+                // When a user logs in
+                $user_id = $_SESSION['user_id'];
+                $event_type = "edit profile";
+                $event_description = "User with ID " . $user_id . " edited profile.";
+                $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                $stmt2 = $conn->prepare($insert_query);
+                $stmt2->bind_param("ss", $event_type, $event_description);
+                $stmt2->execute();
+                $stmt2->close();
+                // Similar logic for other events like signup, post creation, etc.
+
                 header("Location: profile.php"); // Redirect to the user's profile page
                 exit();
             } else {
@@ -50,7 +62,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "UPDATE Users SET fullname=?, email=? WHERE username=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("sss", $fullname, $email, $username);
-
+        // When a user logs in
+        $user_id = $_SESSION['user_id'];
+        $event_type = "edit profile";
+        $event_description = "User with ID " . $user_id . " edited profile.";
+        $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+        $stmt2 = $conn->prepare($insert_query);
+        $stmt2->bind_param("ss", $event_type, $event_description);
+        $stmt2->execute();
+        $stmt2->close();
         if ($stmt->execute()) {
             // User information updated successfully
             header("Location: profile.php"); // Redirect to the user's profile page
