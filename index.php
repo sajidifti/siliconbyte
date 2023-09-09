@@ -118,86 +118,67 @@ session_start();
             <!-- inner -->
             <div class="carousel-inner">
               <!-- items start-->
+              <div class="carousel-inner">
+                <?php
+                // Include the database connection file
+                include 'db-connection.php';
 
-              <div class="carousel-item active">
-                <div class="row align-items-center">
-                  <!-- s_content-->
-                  <div class="col-lg-5 col-md-7">
-                    <div class="s_content">
-                      <h1>স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h1>
-                      <h3>জনপ্রিয় গ্যালাক্সি সিরিজের নতুন ফোন বাজারে আনল স্যামসাং</h3>
-                      <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
-                        জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                      <div class="col-lg-3 col-md-3">
-                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
-                          href="password_page.php">আরো পড়ুন</a>
-                      </div>
-                    </div>
+                // Query the latest 3 articles
+                $latest_articles_query = "
+        SELECT article_id, title, summary, content, article_photo
+        FROM Articles
+        ORDER BY DATETIME DESC
+        LIMIT 3
+    ";
 
-                  </div>
-                  <!-- s_img-->
-                  <div class="offset-lg-2 col-lg-5 col-md-5 d-md-block d-none">
-                    <div class="s_img text-center">
-                      <img src="images/stock/demo.jpg" class="img-fluid" alt="tinyone">
-                    </div>
-                  </div>
-                </div>
+                $result = $conn->query($latest_articles_query);
+
+                if ($result) {
+                  $count = 0;
+
+                  while ($row = $result->fetch_assoc()) {
+                    $article_id = $row['article_id'];
+                    $title = $row['title'];
+                    $summary = $row['summary'];
+                    $content = mb_substr($row['content'], 0, 200, 'UTF-8'); // Limit content to 200 characters
+                    $article_photo = $row['article_photo'];
+
+                    // Determine whether the item is active or not
+                    $active_class = ($count == 0) ? 'active' : '';
+
+                    echo "<div class='carousel-item slider-item $active_class'>";
+                    echo "<div class='row align-items-center'>";
+                    echo "<div class='col-lg-5 col-md-7'>";
+                    echo "<div class='s_content'>";
+                    echo "<h1>$title</h1>";
+                    echo "<h3>$summary</h3>";
+                    echo "<p>$content</p>";
+                    echo "<div class='col-lg-3 col-md-3'>";
+                    echo "<a type='submit' class='btn c_button more-button' style='margin-top: 5rem;' href='readarticle.php?article_id=$article_id'>আরো পড়ুন</a>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div class='offset-lg-2 col-lg-5 col-md-5 d-md-block d-none'>";
+                    echo "<div class='s_img text-center'>";
+                    echo "<img src='$article_photo' class='img-fluid' alt='article_image'>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+
+                    $count++;
+                  }
+                } else {
+                  // Handle database error here
+                  echo "Error: ";
+                }
+
+                // Close the database connection (if not handled in db-connection.php)
+                $conn->close();
+                ?>
               </div>
               <!-- items end-->
-              <!-- items start-->
 
-              <div class="carousel-item">
-                <div class="row align-items-center">
-                  <!-- s_content-->
-                  <div class="col-lg-5 col-md-7">
-                    <div class="s_content">
-                      <h1>স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h1>
-                      <h3>জনপ্রিয় গ্যালাক্সি সিরিজের নতুন ফোন বাজারে আনল স্যামসাং</h3>
-                      <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
-                        জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                      <div class="col-lg-3 col-md-3">
-                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
-                          href="password_page.php">আরো পড়ুন</a>
-                      </div>
-                    </div>
-
-                  </div>
-                  <!-- s_img-->
-                  <div class="offset-lg-2 col-lg-5 col-md-5 d-md-block d-none">
-                    <div class="s_img text-center">
-                      <img src="images/stock/demo.jpg" class="img-fluid" alt="tinyone">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- items end-->
-              <!-- items start-->
-
-              <div class="carousel-item">
-                <div class="row align-items-center">
-                  <!-- s_content-->
-                  <div class="col-lg-5 col-md-7">
-                    <div class="s_content">
-                      <h1>স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h1>
-                      <h3>জনপ্রিয় গ্যালাক্সি সিরিজের নতুন ফোন বাজারে আনল স্যামসাং</h3>
-                      <p>দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের
-                        জন্য ফ্ল্যাগশিপ। বলা হচ্ছে এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                      <div class="col-lg-3 col-md-3">
-                        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;"
-                          href="password_page.php">আরো পড়ুন</a>
-                      </div>
-                    </div>
-
-                  </div>
-                  <!-- s_img-->
-                  <div class="offset-lg-2 col-lg-5 col-md-5 d-md-block d-none">
-                    <div class="s_img text-center">
-                      <img src="images/stock/demo.jpg" class="img-fluid" alt="tinyone">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- items end-->
 
             </div>
           </div>
@@ -219,9 +200,41 @@ session_start();
         // Include the database connection file
         include 'db-connection.php';
 
-        // Query to retrieve all articles
-        $sql = "SELECT * FROM Articles ORDER BY DATETIME DESC"; // You can adjust the ORDER BY clause as needed
-        $result = $conn->query($sql);
+        if (isset($_SESSION['user_id'])) {
+          // Assuming you have a session variable for user_id
+          $user_id = $_SESSION['user_id'];
+
+          $sql = "
+                SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME
+FROM Articles A
+INNER JOIN User_Category_Read_Count U ON A.category = U.category
+WHERE U.user_id = ?
+ORDER BY U.read_count DESC, RAND()
+LIMIT 12
+
+            ";
+
+          if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+            $stmt->execute();
+            $result = $stmt->get_result();
+          } else {
+            // Handle the prepared statement error here
+            echo "Error: " . $conn->error;
+          }
+        } else {
+          // Query to retrieve all articles
+          $sql = "SELECT *
+                    FROM (
+                        SELECT *
+                        FROM Articles
+                        ORDER BY DATETIME DESC
+                        LIMIT 12
+                    ) AS subquery
+                    ORDER BY views DESC";
+
+          $result = $conn->query($sql);
+        }
 
         // Check if there are articles
         if ($result->num_rows > 0) {
@@ -236,7 +249,7 @@ session_start();
             // Format the datetime
             $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
         
-            // Limit the content to 300 characters
+            // Limit the content to 200 characters
             if (mb_strlen($content, 'UTF-8') > 200) {
               $limited_content = mb_substr($content, 0, 200, 'UTF-8');
               $limited_content .= '...'; // Add ellipsis if content is truncated
@@ -246,7 +259,7 @@ session_start();
 
             // HTML for the card
             echo '<div class="col">';
-            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace "details-page.php" with the actual URL of your details page
+            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
             echo '<div class="card h-100 my-card">';
             echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
             echo '<div class="card-body">';
@@ -270,6 +283,7 @@ session_start();
         ?>
 
 
+
       </div>
 
       <!-- Vertical Card Start -->
@@ -277,31 +291,60 @@ session_start();
         <h2><a href="#" class="latest-link">সর্বশেষ <span style="font-size: 120%;">&gt;</span></a></h2>
       </div>
       <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
-        <!-- Single Card Start -->
-        <div class="col-md-6 verticle-card-col">
-          <a href="details-page.html" class="card-link">
-            <!-- Replace "details-page.html" with the actual URL of your details page -->
-            <div class="card mb-3 verticle-card">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                    style="object-fit: cover; width: 100%; height: 100%;">
+        <?php
+        include('db-connection.php'); // Include the database connection file
+        
+        // Define the category you want to query
+        $category = 'smartphone';
+
+        // Query the database
+        $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+          FROM Articles
+          ORDER BY DATETIME DESC
+          LIMIT 4 OFFSET 3";
+
+        $stmt = $conn->prepare($query);
+        // $stmt->bind_param("s", $category);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Loop through the results and create cards
+        while ($row = $result->fetch_assoc()) {
+          // Extract data from the row
+          $articleId = $row['article_id'];
+          $title = $row['title'];
+          $truncatedContent = $row['truncated_content'];
+          $datePublished = $row['DATETIME'];
+          $imageSrc = $row['article_photo'];
+
+          // Output the card HTML with dynamic data
+          echo '<!-- Single Card Start -->
+    <div class="col-md-6 verticle-card-col">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
+                            style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $title . '</h5>
+                            <p class="card-text">' . $truncatedContent . '</p>
+                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                    <p class="card-text">দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি
-                      তাদের ২০২৪ সালের জন্য
-                      ফ্ল্যাগশিপ। বলা হচ্ছে
-                      এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।</p>
-                    <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small></p>
-                  </div>
-                </div>
-              </div>
             </div>
-          </a>
-        </div>
-        <!-- Single Card End -->
+        </a>
+    </div>
+    <!-- Single Card End -->';
+        }
+
+        // Close the database connection
+        $stmt->close();
+        $conn->close();
+        ?>
 
       </div>
       <!-- Vertical Card End -->
@@ -311,30 +354,96 @@ session_start();
         <h2><a href="#" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
       </div>
       <div class="row row-cols-1 row-cols-md-4 g-4">
-        <!-- কার্ড শুরু -->
-        <div class="col">
-          <a href="details-page.html" class="card-link">
-            <!-- Replace "details-page.html" with the actual URL of your details page -->
-            <div class="card h-100 my-card">
-              <img src="images/stock/demo.jpg" class="card-img-top" alt="Palm Springs Road" />
-              <div class="card-body">
-                <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                <p class="card-text">
-                  দক্ষিণ কোয়িয়ার প্রযুক্তি জায়ান্ট স্যামসাং, ফোন লঞ্চ করেছে। যার নাম এস২৪। এটি তাদের ২০২৪ সালের জন্য
-                  ফ্ল্যাগশিপ। বলা হচ্ছে
-                  এখন পর্যন্ত সবচেয়ে শক্তিশালী ফোন এটি।
-                </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ প্রকাশিত</small>
-              </div>
-            </div>
-          </a>
-        </div>
-        <!-- কার্ড শেষ -->
+        <?php
+        // Include the database connection file
+        include 'db-connection.php';
+
+        if (isset($_SESSION['user_id'])) {
+          // Assuming you have a session variable for user_id
+          $user_id = $_SESSION['user_id'];
+
+          $sql = "
+                SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME
+FROM Articles A
+INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
+INNER JOIN Tags T ON AT.tag_id = T.tag_id
+INNER JOIN User_Tag_Read_Count U ON AT.tag_id = U.tag_id
+WHERE U.user_id = ?
+ORDER BY U.read_count DESC, RAND()
+LIMIT 8
+
+            ";
+
+          if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
+            $stmt->execute();
+            $result = $stmt->get_result();
+          } else {
+            // Handle the prepared statement error here
+            echo "Error: ";
+          }
+        } else {
+          // Query to retrieve all articles
+          $sql = "SELECT *
+                    FROM (
+                        SELECT *
+                        FROM Articles
+                        ORDER BY DATETIME DESC
+                        LIMIT 8
+                    ) AS subquery
+                    ORDER BY views ASC";
+
+          $result = $conn->query($sql);
+        }
+
+        // Check if there are articles
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            // Extract data from the current row
+            $article_id = $row['article_id'];
+            $title = $row['title'];
+            $content = $row['content'];
+            $article_photo = $row['article_photo'];
+            $datetime = $row['DATETIME'];
+
+            // Format the datetime
+            $formatted_datetime = date("j/n/Y H:i", strtotime($datetime)); // Adjust the date format as needed
+        
+            // Limit the content to 200 characters
+            if (mb_strlen($content, 'UTF-8') > 200) {
+              $limited_content = mb_substr($content, 0, 200, 'UTF-8');
+              $limited_content .= '...'; // Add ellipsis if content is truncated
+            } else {
+              $limited_content = $content;
+            }
+
+            // HTML for the card
+            echo '<div class="col">';
+            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+            echo '<div class="card h-100 my-card">';
+            echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $title . '</h5>';
+            echo '<p class="card-text">' . $limited_content . '</p>';
+            echo '</div>';
+            echo '<div class="card-footer">';
+            echo '<small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small>';
+            echo '</div>';
+            echo '</div>';
+            echo '</a>';
+            echo '</div>';
+          }
+        } else {
+          // Handle the case where there are no articles
+          echo 'No articles found.';
+        }
+
+        // Close the database connection
+        $conn->close();
+        ?>
       </div>
       <div class="col-lg-2 col-md-2 container-fluid">
-        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="password_page.php">আরো
+        <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="articles.php">আরো
           দেখুন</a>
       </div>
 
@@ -361,7 +470,7 @@ session_start();
       <div class="row">
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=smartphone"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">
@@ -380,7 +489,7 @@ session_start();
         <!-- single item end-->
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=pc"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">
@@ -399,7 +508,7 @@ session_start();
         <!-- single item end-->
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=gaming"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">
@@ -418,7 +527,7 @@ session_start();
         <!-- single item end-->
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=tutorial"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">
@@ -437,7 +546,7 @@ session_start();
         <!-- single item end-->
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=software"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">
@@ -456,7 +565,7 @@ session_start();
         <!-- single item end-->
         <!-- single item start-->
         <div class="col-lg-4 col-sm-6 single_item">
-          <a href="your-link-here"> <!-- Add your link within the href attribute -->
+          <a href="category.php?category=programing"> <!-- Add your link within the href attribute -->
             <div class="row">
               <div class="col-lg-3">
                 <div class="a_icon text-center">

@@ -226,55 +226,79 @@ session_start();
                         <h2 class="related-articles">সম্পর্কিত আরো খবর</h2>
                     </div>
 
-                    <!-- Single Card Start -->
-                    <div class="col verticle-card-col">
-                        <a href="details-page.html" class="card-link">
-                            <!-- Replace "details-page.html" with the actual URL of your details page -->
-                            <div class="card mb-3 verticle-card">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                            style="object-fit: cover; width: 100%; height: 100%;">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                            <p class="card-text">text</p>
-                                            <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ
-                                                    প্রকাশিত</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Single Card End -->
+                            <?php
+                            // Include the database connection file
+                            include 'db-connection.php';
 
-                    <!-- Single Card Start -->
-                    <div class="col verticle-card-col">
-                        <a href="details-page.html" class="card-link">
-                            <!-- Replace "details-page.html" with the actual URL of your details page -->
-                            <div class="card mb-3 verticle-card">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="images/stock/demo.jpg" class="img-fluid rounded-start" alt="..."
-                                            style="object-fit: cover; width: 100%; height: 100%;">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">স্যামসাং গ্যালাক্সি মুঠোফোনের পরবর্তী সংযোজন</h5>
-                                            <p class="card-text">text</p>
-                                            <p class="card-text"><small class="text-muted">৫/৯/২০২৩ ১২ঃ৩০ এ
-                                                    প্রকাশিত</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Single Card End -->
+                            // Assuming you have the current article's ID
+                            $current_article_id = $_GET['article_id']; // Replace with your method of retrieving the current article's ID
+                            
+                            // Query related articles based on categories or tags (modify the query as needed)
+                            $sql = "
+            SELECT DISTINCT A.article_id, A.title, A.summary, A.article_photo, A.DATETIME
+            FROM Articles A
+            INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
+            INNER JOIN Tags T ON AT.tag_id = T.tag_id
+            WHERE AT.article_id != ? -- Exclude the current article
+            AND (T.tag_name IN (
+                SELECT T.tag_name
+                FROM Article_Tags AT
+                INNER JOIN Tags T ON AT.tag_id = T.tag_id
+                WHERE AT.article_id = ?
+            ) OR A.category IN (
+                SELECT A.category
+                FROM Articles A
+                WHERE A.article_id = ?
+            ))
+            ORDER BY RAND()
+            LIMIT 4
+        ";
+
+                            if ($stmt = $conn->prepare($sql)) {
+                                $stmt->bind_param("iii", $current_article_id, $current_article_id, $current_article_id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+
+                                while ($row = $result->fetch_assoc()) {
+                                    // Extract data from the current row
+                                    $related_article_id = $row['article_id'];
+                                    $related_article_title = $row['title'];
+                                    $related_article_summary = $row['summary'];
+                                    $related_article_photo = $row['article_photo'];
+                                    $related_article_datetime = $row['DATETIME'];
+
+                                    // Format the datetime
+                                    $formatted_datetime = date("j/n/Y H:i", strtotime($related_article_datetime)); // Adjust the date format as needed
+                            
+                                    // HTML for the related article card
+                                    echo '<div class="col verticle-card-col">';
+                                    echo '<a href="readarticle.php?article_id=' . $related_article_id . '" class="card-link">'; // Replace with your actual URL
+                                    echo '<div class="card mb-3 verticle-card">';
+                                    echo '<div class="row g-0">';
+                                    echo '<div class="col-md-4">';
+                                    echo '<img src="' . $related_article_photo . '" class="img-fluid rounded-start" alt="' . $related_article_title . '" style="object-fit: cover; width: 100%; height: 100%;">'; // Use the article_photo column as the image source
+                                    echo '</div>';
+                                    echo '<div class="col-md-8">';
+                                    echo '<div class="card-body">';
+                                    echo '<h5 class="card-title">' . $related_article_title . '</h5>';
+                                    echo '<p class="card-text">' . $related_article_summary . '</p>';
+                                    echo '<p class="card-text"><small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small></p>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</a>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                // Handle the prepared statement error here
+                                echo "Error: " . $conn->error;
+                            }
+
+                            // Close the database connection
+                            $conn->close();
+                            ?>
+
                     <!-- Add more related articles as needed -->
                 </div>
             </div>
@@ -316,7 +340,7 @@ session_start();
                                     $category = $category_row['category'];
 
                                     // Display the category
-                                    echo '<a href="#">' . $category . '</a>';
+                                    echo '<a href="category.php?category=' . $category . '">' . $category . '</a>';
                                 } else {
                                     echo 'Error retrieving category information.';
                                 }
@@ -339,7 +363,7 @@ session_start();
                                     echo '<div class="tags">';
                                     while ($tag_row = $tags_result->fetch_assoc()) {
                                         $tag_name = $tag_row['tag_name'];
-                                        echo '<a href="#">' . $tag_name . '</a>';
+                                        echo '<a href="tag.php?tag=' . $tag_name . '">' . $tag_name . '</a>';
                                     }
                                     echo '</div>';
                                     echo '</div>';

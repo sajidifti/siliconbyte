@@ -1,5 +1,7 @@
 <?php
-require_once('db-connection.php'); // Include your database connection script
+
+// Include your database connection script (db-connection.php)
+require_once('db-connection.php');
 
 // Function to calculate recommendation scores for articles
 function calculateRecommendationScore($user_id, $article_id)
@@ -71,7 +73,6 @@ function getUserPreferences($user_id)
     ];
 }
 
-
 // Function to get article categories
 function getArticleCategories($article_id)
 {
@@ -92,7 +93,6 @@ function getArticleCategories($article_id)
 
     return $articleCategories;
 }
-
 
 // Function to get article tags
 function getArticleTags($article_id)
@@ -118,7 +118,6 @@ function getArticleTags($article_id)
     return $articleTags;
 }
 
-
 // Function to calculate category match score
 function calculateCategoryMatchScore($userCategories, $articleCategories)
 {
@@ -135,7 +134,6 @@ function calculateCategoryMatchScore($userCategories, $articleCategories)
 
     return $matchScore;
 }
-
 
 // Function to calculate tag match score
 function calculateTagMatchScore($userTags, $articleTags)
@@ -154,11 +152,7 @@ function calculateTagMatchScore($userTags, $articleTags)
     return $matchScore;
 }
 
-
-
-
 // Function to get recommended articles for a user
-
 function getRecommendedArticles($user_id)
 {
     global $conn;
@@ -166,8 +160,8 @@ function getRecommendedArticles($user_id)
     // Get user's category and tag preferences with read counts
     $userPreferences = getUserPreferences($user_id);
 
-    // Initialize an array to store the recommended article IDs
-    $recommended_article_ids = [];
+    // Initialize an associative array to store article recommendation scores
+    $articleScores = [];
 
     // Iterate through user preferences for categories
     foreach ($userPreferences['categories'] as $category => $read_count) {
@@ -180,10 +174,11 @@ function getRecommendedArticles($user_id)
             while ($row = $category_result->fetch_assoc()) {
                 $article_id = $row['article_id'];
 
-                // Check if the article is not already recommended and add it to the recommendations
-                if (!in_array($article_id, $recommended_article_ids)) {
-                    $recommended_article_ids[] = $article_id;
-                }
+                // Calculate the recommendation score for the article
+                $recommendationScore = calculateRecommendationScore($user_id, $article_id);
+
+                // Store the article ID and recommendation score in the array
+                $articleScores[$article_id] = $recommendationScore;
             }
         }
     }
@@ -199,17 +194,27 @@ function getRecommendedArticles($user_id)
             while ($row = $tag_result->fetch_assoc()) {
                 $article_id = $row['article_id'];
 
-                // Check if the article is not already recommended and add it to the recommendations
-                if (!in_array($article_id, $recommended_article_ids)) {
-                    $recommended_article_ids[] = $article_id;
-                }
+                // Calculate the recommendation score for the article
+                $recommendationScore = calculateRecommendationScore($user_id, $article_id);
+
+                // Store the article ID and recommendation score in the array
+                $articleScores[$article_id] = $recommendationScore;
             }
         }
     }
 
-    // Limit the number of recommendations to 10 (you can adjust this number)
-    $recommended_article_ids = array_slice($recommended_article_ids, 0, 10);
+    // Sort articles by recommendation score in descending order
+    arsort($articleScores);
+
+    // Extract the recommended article IDs (up to 10) from the sorted array
+    $recommended_article_ids = array_keys(array_slice($articleScores, 0, 10));
 
     // Store the recommended article IDs in a SESSION variable
     $_SESSION['recommended_articles'] = $recommended_article_ids;
 }
+
+// Call the getRecommendedArticles function for a user (provide the user_id)
+// Example usage:
+// $user_id = 1; // Replace with the actual user_id
+// getRecommendedArticles($user_id);
+?>

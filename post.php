@@ -72,6 +72,17 @@ if (isset($_SESSION['user_id'])) {
                     $stmtTag->close();
                     $stmt->close();
 
+                    // When a user logs in
+                    $event_type = "post";
+                    $event_description = "User with ID " . $user_id . " posted article with ID " . $article_id;
+                    $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                    $stmt = $conn->prepare($insert_query);
+                    $stmt->bind_param("ss", $event_type, $event_description);
+                    $stmt->execute();
+                    $stmt->close();
+
+                    // Similar logic for other events like signup, post creation, etc.
+
                     // Redirect to a success page or do further processing
                     $success = "লেখাটি প্রকাশিত হয়েছে।";
                     header("Location: post_page.php?success=" . urlencode($success));

@@ -1,6 +1,6 @@
 <?php
 require_once('db-connection.php'); // Include your database connection script
-require_once('recommendation-engine.php'); // Include the recommendation engine script
+// require_once('recommendation-engine.php');
 
 // Start the session (if not already started)
 session_start();
@@ -10,8 +10,10 @@ $user_id = $_SESSION['user_id']; // Make sure the user is properly authenticated
 
 if ($user_id !== false) {
     // Call the getRecommendedArticles function to store recommended article IDs in session
-    getRecommendedArticles($user_id);
-    $recommended_article_ids = $_SESSION['recommended_articles'];
+    // getRecommendedArticles($user_id);
+    // $recommended_article_ids = $_SESSION['recommended_articles'];
+    require_once('recommend.php');
+    $recommended_article_ids = $_SESSION['article_id'];
 
     // Loop through the recommended article IDs and fetch data from the database
     foreach ($recommended_article_ids as $article_id) {

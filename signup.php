@@ -90,6 +90,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 // Registration successful, redirect to a success page or login page
                 $success = "নিবন্ধন সফল হয়েছে। সাইনইন করুন।";
+                
+                $user_id = $stmt->insert_id;
+                // When a user logs in
+                $event_type = "signup";
+                $event_description = "User with ID " . $user_id . " signed up.";
+                $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                $stmt = $conn->prepare($insert_query);
+                $stmt->bind_param("ss", $event_type, $event_description);
+                $stmt->execute();
+                $stmt->close();
+
+                // Similar logic for other events like signup, post creation, etc.
+
 
                 // Redirect to signin_page.php with the success message
                 header("Location: signin_page.php?success=" . urlencode($success));

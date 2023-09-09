@@ -11,6 +11,7 @@ CREATE TABLE Users(
 CREATE TABLE Articles(
     article_id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255),
+    summary VARCHAR(50),
     content TEXT,
     article_photo VARCHAR(255),
     DATETIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
