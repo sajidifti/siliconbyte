@@ -4,6 +4,11 @@ session_start();
 
 if (isset($_GET['tag'])) {
     $categoryBangla = $_GET['tag'];
+} else{
+    // Redirect to the login page or display a message
+    $error = "ভুল লিংক।";
+    header("Location: index.php?error=" . urlencode($error));
+    exit();
 }
 
 

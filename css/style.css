@@ -474,3 +474,30 @@ footer {
 .tags a:hover{
   background-color: #f3fde8;
 }
+
+.slider-item{
+  /* display: flex; */
+  /* flex-direction: column; */
+  height: 435px;
+  text-align: justify;
+}
+
+.s_img {
+  text-align: center;
+  /* Set the dimensions and other styles for the container */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-fill {
+  /* Set the dimensions and other styles for the image */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.admin{
+  padding-bottom: 150px;
+}

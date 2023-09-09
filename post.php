@@ -5,6 +5,26 @@ include 'db-connection.php';
 // Start the session
 session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to the login page or display a message
+    $error = "পাতাটি দেখতে আগে সাইনইন করুন।";
+    header("Location: signin_page.php?error=" . urlencode($error));
+    exit();
+}
+
+if (isset($_SESSION['role'])) {
+
+    if ($_SESSION['role'] != "writer") {
+        // Redirect to the login page or display a message
+        $error = "পাতাটি শুধুমাত্র লেখকদের জন্য বরাদ্দ।";
+        header("Location: index.php?error=" . urlencode($error));
+        exit();
+    }
+
+}
+//
+
 // Check if the user is logged in and has a valid session
 if (isset($_SESSION['user_id'])) {
     // Get the user_id from the session

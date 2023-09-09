@@ -273,7 +273,7 @@ session_start();
                                     // HTML for the related article card
                                     echo '<div class="col verticle-card-col">';
                                     echo '<a href="readarticle.php?article_id=' . $related_article_id . '" class="card-link">'; // Replace with your actual URL
-                                    echo '<div class="card mb-3 verticle-card">';
+                                    echo '<div class="card mb-3 h-100 verticle-card">';
                                     echo '<div class="row g-0">';
                                     echo '<div class="col-md-4">';
                                     echo '<img src="' . $related_article_photo . '" class="img-fluid rounded-start" alt="' . $related_article_title . '" style="object-fit: cover; width: 100%; height: 100%;">'; // Use the article_photo column as the image source

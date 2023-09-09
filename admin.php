@@ -1,7 +1,24 @@
 <?php
 
 session_start();
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to the login page or display a message
+    $error = "পাতাটি দেখতে আগে সাইনইন করুন।";
+    header("Location: signin_page.php?error=" . urlencode($error));
+    exit();
+}
 
+if (isset($_SESSION['role'])) {
+
+    if ($_SESSION['role'] != "admin") {
+        // Redirect to the login page or display a message
+        $error = "পাতাটি শুধুমাত্র ব্যবস্থাপকদের জন্য বরাদ্দ।";
+        header("Location: index.php?error=" . urlencode($error));
+        exit();
+    }
+
+}
 // Include the database connection file
 include 'db-connection.php'; // Replace with the actual path to your database connection file
 
@@ -11,7 +28,7 @@ $visitsData = array();
 $contactsData = array(); // Added a new array for contacts data
 
 // Query to retrieve data from the Analytics table
-$analyticsQuery = "SELECT id, event_type, event_description, event_datetime FROM Analytics";
+$analyticsQuery = "SELECT id, event_type, event_description, event_datetime FROM Analytics ORDER BY event_datetime DESC LIMIT 10";
 
 // Execute the query
 $analyticsResult = $conn->query($analyticsQuery);
@@ -28,7 +45,7 @@ if ($analyticsResult) {
 }
 
 // Query to retrieve data from the Visits table
-$visitsQuery = "SELECT id, ip_address, visit_datetime FROM Visits";
+$visitsQuery = "SELECT id, ip_address, visit_datetime FROM Visits ORDER BY visit_datetime DESC LIMIT 10";
 
 // Execute the query
 $visitsResult = $conn->query($visitsQuery);
@@ -45,7 +62,7 @@ if ($visitsResult) {
 }
 
 // Query to retrieve data from the Contacts table (corrected variable names)
-$contactsQuery = "SELECT contact_id, email FROM Contacts";
+$contactsQuery = "SELECT contact_id, email FROM Contacts ORDER BY contact_id DESC LIMIT 10";
 
 // Execute the query
 $contactsResult = $conn->query($contactsQuery);

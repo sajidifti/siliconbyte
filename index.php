@@ -160,7 +160,7 @@ session_start();
                     echo "</div>";
                     echo "<div class='offset-lg-2 col-lg-5 col-md-5 d-md-block d-none'>";
                     echo "<div class='s_img text-center'>";
-                    echo "<img src='$article_photo' class='img-fluid' alt='article_image'>";
+                    echo "<img src='$article_photo' class='img-fluid img-fill' alt='article_image'>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

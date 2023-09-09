@@ -9,6 +9,16 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+if (isset($_SESSION['role'])) {
+
+    if ($_SESSION['role'] != "writer") {
+        // Redirect to the login page or display a message
+        $error = "পাতাটি শুধুমাত্র লেখকদের জন্য বরাদ্দ।";
+        header("Location: index.php?error=" . urlencode($error));
+        exit();
+    }
+    
+}
 // Include your database connection file
 include('db-connection.php');
 
@@ -138,7 +148,7 @@ $conn->close();
     <!-- Error message display end -->
 
     <section class="post">
-        <div class="container mt-4">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-9">
                     <div class="c_title text-center">
@@ -147,85 +157,104 @@ $conn->close();
                     </div>
                 </div>
             </div>
-            <form action="post.php" method="POST" enctype="multipart/form-data">
-                <!-- Article Title -->
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="title" name="title" required placeholder="শিরোনাম">
-                </div>
 
-                <!-- Article Summary -->
-                <div class="mb-3">
-                    <textarea class="form-control" id="summary" name="summary" maxlength="50" required placeholder="সারাংশ (৫০ অক্ষরের মধ্যে)"></textarea>
-                </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="c_form">
+                        <form action="post.php" method="POST" enctype="multipart/form-data">
+                            <div class="row g-3 justify-content-center">
+                                <!-- Article Title -->
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="text" class="form-control" id="title" name="title" required
+                                        placeholder="শিরোনাম">
+                                </div>
 
-                <!-- Article Content -->
-                <div class="mb-3">
-                    <textarea class="form-control" id="content" name="content" rows="5" required placeholder="বর্ণনা"></textarea>
-                </div>
+                                <!-- Article Summary -->
+                                <div class="col-lg-9 col-md-9">
+                                    <textarea class="form-control" id="summary" name="summary" maxlength="50" required
+                                        placeholder="সারাংশ (৫০ অক্ষরের মধ্যে)"></textarea>
+                                </div>
 
-                <!-- Article Photo -->
-                <div class="mb-3">
-                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required placeholder="ছবি">
-                </div>
+                                <!-- Article Content -->
+                                <div class="col-lg-9 col-md-9">
+                                    <textarea class="form-control" id="content" name="content" rows="5" required
+                                        placeholder="বর্ণনা"></textarea>
+                                </div>
 
-                <!-- Article Category -->
-                <div class="mb-3">
-                    <label for="category" class="form-label">বিভাগ</label>
-                    <select class="form-select" id="category" name="category" required>
-                        <option value="smartphone">Smartphone</option>
-                        <option value="pc">PC</option>
-                        <option value="software">Software</option>
-                        <option value="tutorial">Tutorial</option>
-                        <option value="programing">Programing</option>
-                        <option value="gaming">Gaming</option>
-                    </select>
-                </div>
+                                <!-- Article Photo -->
+                                <div class="col-lg-9 col-md-9">
+                                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*"
+                                        required placeholder="ছবি">
+                                </div>
 
-                <!-- Tags -->
-                <!-- Tags -->
-                <div class="mb-3">
-                    <label class="form-label">ট্যাগসমূহ</label>
-                    <div class="d-flex">
-                        <?php
-                        // Include the database connection file
-                        include 'db-connection.php';
+                                <!-- Article Category -->
+                                <div class="col-lg-9 col-md-9">
+                                    <label for="category" class="form-label">বিভাগ</label>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <option value="smartphone">Smartphone</option>
+                                        <option value="pc">PC</option>
+                                        <option value="software">Software</option>
+                                        <option value="tutorial">Tutorial</option>
+                                        <option value="programing">Programing</option>
+                                        <option value="gaming">Gaming</option>
+                                    </select>
+                                </div>
 
-                        // Retrieve tags from the Tags table
-                        $sql = "SELECT * FROM Tags";
-                        $result = $conn->query($sql);
+                                <!-- Tags -->
+                                <!-- Tags -->
+                                <div class="col-lg-9 col-md-9">
+                                    <div class="d-flex justify-content-center text-center">
 
-                        // Create five tag select fields
-                        for ($i = 1; $i <= 5; $i++) {
-                            echo '<div class="me-3">';
-                            echo '<label for="tags' . $i . '" class="form-label">ট্যাগ ' . $i . '</label>';
-                            echo '<select class="form-select" id="tags' . $i . '" name="tag' . $i . '">'; // Note the name="tag1", "tag2", etc.
-                        
-                            // Populate the select list with options
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<option value="' . $row['tag_id'] . '">' . $row['tag_name'] . '</option>';
-                            }
+                                        <?php
+                                        // Include the database connection file
+                                        include 'db-connection.php';
 
-                            echo '</select>';
-                            echo '</div>';
+                                        // Retrieve tags from the Tags table
+                                        $sql = "SELECT * FROM Tags";
+                                        $result = $conn->query($sql);
 
-                            // Reset the result pointer to the beginning for the next select list
-                            $result->data_seek(0);
-                        }
+                                        // Create five tag select fields
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            echo '<div class="me-3 d-inline-block">'; // Add the d-inline-block class here
+                                            echo '<label for="tags' . $i . '" class="form-label">ট্যাগ ' . $i . '</label>';
+                                            echo '<select class="form-select" id="tags' . $i . '" name="tag' . $i . '">'; // Note the name="tag1", "tag2", etc.
+                                        
+                                            // Populate the select list with options
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo '<option value="' . $row['tag_id'] . '">' . $row['tag_name'] . '</option>';
+                                            }
 
-                        // Close the database connection
-                        $conn->close();
-                        ?>
+                                            echo '</select>';
+                                            echo '</div>';
+
+                                            // Reset the result pointer to the beginning for the next select list
+                                            $result->data_seek(0);
+                                        }
+
+                                        // Close the database connection
+                                        $conn->close();
+                                        ?>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- End tag -->
+
+
+
+
+
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="col-lg-2 col-md-2 container-fluid">
+                                <button type="submit" class="btn c_button" style="margin-top: 5rem;">প্রকাশ
+                                    করুন</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <!-- End tag -->
-
-
-
-
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </div>
     </section>
 
