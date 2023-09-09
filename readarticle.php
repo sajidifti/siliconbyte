@@ -223,7 +223,7 @@ session_start();
                 <div class="col-md-4">
                     <!-- Related Articles Section -->
                     <div class="mb-4">
-                        <h2 class="related-articles">Related Articles</h2>
+                        <h2 class="related-articles">সম্পর্কিত আরো খবর</h2>
                     </div>
 
                     <!-- Single Card Start -->

@@ -173,7 +173,7 @@ $conn->close();
                         <option value="pc">PC</option>
                         <option value="software">Software</option>
                         <option value="tutorial">Tutorial</option>
-                        <option value="programming">Programming</option>
+                        <option value="programing">Programing</option>
                         <option value="gaming">Gaming</option>
                     </select>
                 </div>

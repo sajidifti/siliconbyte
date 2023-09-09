@@ -245,10 +245,12 @@ session_start();
                 $category = 'smartphone';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -266,8 +268,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -309,9 +311,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -379,10 +382,12 @@ session_start();
                 $category = 'pc';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -400,8 +405,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -443,9 +448,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -511,10 +517,12 @@ session_start();
                 $category = 'gaming';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -532,8 +540,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -575,9 +583,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -643,10 +652,12 @@ session_start();
                 $category = 'tutorial';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -664,8 +675,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -707,9 +718,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -775,10 +787,12 @@ session_start();
                 $category = 'software';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -796,8 +810,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -839,9 +853,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -906,10 +921,12 @@ session_start();
                 $category = 'programing';
 
                 // Query the database
-                $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
+$query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
           FROM Articles
           WHERE category = ?
+          ORDER BY DATETIME DESC
           LIMIT 2";
+
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $category);
                 $stmt->execute();
@@ -927,8 +944,8 @@ session_start();
                     // Output the card HTML with dynamic data
                     echo '<!-- Single Card Start -->
     <div class="col-md-6 verticle-card-col">
-        <a href="details-page.html?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card">
+        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+            <div class="card mb-3 verticle-card h-100">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
@@ -970,9 +987,10 @@ session_start();
                 $offset_value = $offset * $limit;
 
                 // Query to retrieve articles from the specified category with pagination
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ?, ?";
+                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sii", $category, $offset_value, $limit);
+                $stmt->bind_param("sii", $category, $limit, $offset);
                 $stmt->execute();
                 $result = $stmt->get_result();
 

@@ -1,8 +1,6 @@
 <?php
 require_once('db-connection.php'); // Include your database connection script
 
-session_start();
-
 // Function to calculate recommendation scores for articles
 function calculateRecommendationScore($user_id, $article_id)
 {
@@ -145,14 +143,12 @@ function calculateTagMatchScore($userTags, $articleTags)
     // Initialize a variable to store the score
     $matchScore = 0;
 
-    // Calculate the intersection of user tags and article tags
-    $commonTags = array_intersect($userTags, array_keys($articleTags));
-
-    // You can adjust the scoring logic based on your requirements
-    // For example, you can give more weight to a larger number of common tags
-    // Here, we'll simply count the common tags and sum their read counts
-    foreach ($commonTags as $tag_id) {
-        $matchScore += $articleTags[$tag_id]['read_count'];
+    // Loop through user tags and check if they exist in article tags
+    foreach ($userTags as $userTag => $userTagData) {
+        if (isset($articleTags[$userTag])) {
+            // If the user tag exists in the article tags, add its read count to the score
+            $matchScore += $userTagData['read_count'];
+        }
     }
 
     return $matchScore;
@@ -160,82 +156,60 @@ function calculateTagMatchScore($userTags, $articleTags)
 
 
 
+
 // Function to get recommended articles for a user
+
 function getRecommendedArticles($user_id)
 {
     global $conn;
 
-    // Calculate recommendation scores for articles
-    $recommendations = [];
+    // Get user's category and tag preferences with read counts
+    $userPreferences = getUserPreferences($user_id);
 
-    // Replace this with your code to find similar users and calculate scores
-    // You'll need to implement user similarity calculations here
-    // For simplicity, we'll generate random recommendations
-    $article_query = "SELECT article_id, title FROM Articles ORDER BY RAND() LIMIT 10";
-    $article_result = $conn->query($article_query);
+    // Initialize an array to store the recommended article IDs
+    $recommended_article_ids = [];
 
-    while ($row = $article_result->fetch_assoc()) {
-        $article_id = $row['article_id'];
-        $title = $row['title'];
+    // Iterate through user preferences for categories
+    foreach ($userPreferences['categories'] as $category => $read_count) {
+        // Query to retrieve articles in the user's preferred category
+        $category_query = "SELECT article_id FROM Articles WHERE category = '$category' ORDER BY views DESC LIMIT 5";
 
-        // Calculate a recommendation score (for illustration, using a random score)
-        $recommendation_score = calculateRecommendationScore($user_id, $article_id);
+        $category_result = $conn->query($category_query);
 
-        // Store the article and its recommendation score
-        $recommendations[$article_id] = [
-            'title' => $title,
-            'score' => $recommendation_score,
-        ];
+        if ($category_result) {
+            while ($row = $category_result->fetch_assoc()) {
+                $article_id = $row['article_id'];
+
+                // Check if the article is not already recommended and add it to the recommendations
+                if (!in_array($article_id, $recommended_article_ids)) {
+                    $recommended_article_ids[] = $article_id;
+                }
+            }
+        }
     }
 
-    // Sort articles by recommendation score in descending order
-    arsort($recommendations);
+    // Iterate through user preferences for tags
+    foreach ($userPreferences['tags'] as $tag_id => $tagData) {
+        // Query to retrieve articles associated with the user's preferred tag
+        $tag_query = "SELECT article_id FROM Article_Tags WHERE tag_id = $tag_id ORDER BY RAND() LIMIT 5";
 
-    return $recommendations;
-}
+        $tag_result = $conn->query($tag_query);
 
-// Function to authenticate a user (replace with your authentication logic)
-function authenticateUser($username, $password)
-{
-    global $conn;
+        if ($tag_result) {
+            while ($row = $tag_result->fetch_assoc()) {
+                $article_id = $row['article_id'];
 
-    // Implement your user authentication logic here
-    // Example: Check if the username and password match a user in the database
-    $username = $conn->real_escape_string($username);
-    $password = $conn->real_escape_string($password);
-
-    $query = "SELECT user_id FROM Users WHERE username = '$username' AND PASSWORD = '$password'";
-    $result = $conn->query($query);
-
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        return $row['user_id'];
-    } else {
-        return false; // Authentication failed
+                // Check if the article is not already recommended and add it to the recommendations
+                if (!in_array($article_id, $recommended_article_ids)) {
+                    $recommended_article_ids[] = $article_id;
+                }
+            }
+        }
     }
+
+    // Limit the number of recommendations to 10 (you can adjust this number)
+    $recommended_article_ids = array_slice($recommended_article_ids, 0, 10);
+
+    // Store the recommended article IDs in a SESSION variable
+    $_SESSION['recommended_articles'] = $recommended_article_ids;
 }
-
-// Main script
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Get user credentials from request parameters
-    $username = $_GET['username'];
-    $password = $_GET['password'];
-
-    // Authenticate the user
-    $user_id = authenticateUser($username, $password);
-
-    if ($user_id !== false) {
-        // Get recommended articles for the authenticated user
-        $recommended_articles = getRecommendedArticles($user_id);
-
-        // Return the recommended articles in JSON format
-        header('Content-Type: application/json');
-        echo json_encode($recommended_articles);
-    } else {
-        http_response_code(401); // Unauthorized
-        echo "Authentication failed.";
-    }
-} else {
-    http_response_code(405); // Method Not Allowed
-}
-?>
