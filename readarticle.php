@@ -226,15 +226,15 @@ session_start();
                         <h2 class="related-articles">সম্পর্কিত আরো খবর</h2>
                     </div>
 
-                            <?php
-                            // Include the database connection file
-                            include 'db-connection.php';
+                    <?php
+                    // Include the database connection file
+                    include 'db-connection.php';
 
-                            // Assuming you have the current article's ID
-                            $current_article_id = $_GET['article_id']; // Replace with your method of retrieving the current article's ID
-                            
-                            // Query related articles based on categories or tags (modify the query as needed)
-                            $sql = "
+                    // Assuming you have the current article's ID
+                    $current_article_id = $_GET['article_id']; // Replace with your method of retrieving the current article's ID
+                    
+                    // Query related articles based on categories or tags (modify the query as needed)
+                    $sql = "
             SELECT DISTINCT A.article_id, A.title, A.summary, A.article_photo, A.DATETIME
             FROM Articles A
             INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
@@ -254,50 +254,50 @@ session_start();
             LIMIT 4
         ";
 
-                            if ($stmt = $conn->prepare($sql)) {
-                                $stmt->bind_param("iii", $current_article_id, $current_article_id, $current_article_id);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
+                    if ($stmt = $conn->prepare($sql)) {
+                        $stmt->bind_param("iii", $current_article_id, $current_article_id, $current_article_id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
 
-                                while ($row = $result->fetch_assoc()) {
-                                    // Extract data from the current row
-                                    $related_article_id = $row['article_id'];
-                                    $related_article_title = $row['title'];
-                                    $related_article_summary = $row['summary'];
-                                    $related_article_photo = $row['article_photo'];
-                                    $related_article_datetime = $row['DATETIME'];
+                        while ($row = $result->fetch_assoc()) {
+                            // Extract data from the current row
+                            $related_article_id = $row['article_id'];
+                            $related_article_title = $row['title'];
+                            $related_article_summary = $row['summary'];
+                            $related_article_photo = $row['article_photo'];
+                            $related_article_datetime = $row['DATETIME'];
 
-                                    // Format the datetime
-                                    $formatted_datetime = date("j/n/Y H:i", strtotime($related_article_datetime)); // Adjust the date format as needed
-                            
-                                    // HTML for the related article card
-                                    echo '<div class="col verticle-card-col">';
-                                    echo '<a href="readarticle.php?article_id=' . $related_article_id . '" class="card-link">'; // Replace with your actual URL
-                                    echo '<div class="card mb-3 h-100 verticle-card">';
-                                    echo '<div class="row g-0">';
-                                    echo '<div class="col-md-4">';
-                                    echo '<img src="' . $related_article_photo . '" class="img-fluid rounded-start" alt="' . $related_article_title . '" style="object-fit: cover; width: 100%; height: 100%;">'; // Use the article_photo column as the image source
-                                    echo '</div>';
-                                    echo '<div class="col-md-8">';
-                                    echo '<div class="card-body">';
-                                    echo '<h5 class="card-title">' . $related_article_title . '</h5>';
-                                    echo '<p class="card-text">' . $related_article_summary . '</p>';
-                                    echo '<p class="card-text"><small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small></p>';
-                                    echo '</div>';
-                                    echo '</div>';
-                                    echo '</div>';
-                                    echo '</div>';
-                                    echo '</a>';
-                                    echo '</div>';
-                                }
-                            } else {
-                                // Handle the prepared statement error here
-                                echo "Error: " . $conn->error;
-                            }
+                            // Format the datetime
+                            $formatted_datetime = date("j/n/Y H:i", strtotime($related_article_datetime)); // Adjust the date format as needed
+                    
+                            // HTML for the related article card
+                            echo '<div class="col verticle-card-col">';
+                            echo '<a href="readarticle.php?article_id=' . $related_article_id . '" class="card-link">'; // Replace with your actual URL
+                            echo '<div class="card mb-3 h-100 verticle-card">';
+                            echo '<div class="row g-0">';
+                            echo '<div class="col-md-4">';
+                            echo '<img src="' . $related_article_photo . '" class="img-fluid rounded-start" alt="' . $related_article_title . '" style="object-fit: cover; width: 100%; height: 100%;">'; // Use the article_photo column as the image source
+                            echo '</div>';
+                            echo '<div class="col-md-8">';
+                            echo '<div class="card-body">';
+                            echo '<h5 class="card-title">' . $related_article_title . '</h5>';
+                            echo '<p class="card-text">' . $related_article_summary . '</p>';
+                            echo '<p class="card-text"><small class="text-muted">' . $formatted_datetime . ' এ প্রকাশিত</small></p>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</a>';
+                            echo '</div>';
+                        }
+                    } else {
+                        // Handle the prepared statement error here
+                        echo "Error: ";
+                    }
 
-                            // Close the database connection
-                            $conn->close();
-                            ?>
+                    // Close the database connection
+                    $conn->close();
+                    ?>
 
                     <!-- Add more related articles as needed -->
                 </div>
@@ -388,67 +388,12 @@ session_start();
         </div>
     </section>
 
-    <!-- footer start-->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-12">
-                    <address class="f_1">
-                        <p>সিলিকনবাইট<br>আফতাবনগর<br>ঢাকা, বাংলাদেশ</p>
-                        <p>contact@siliconbyte.com</p>
-                        <p>+88 01700000000</p>
-                    </address>
+    <?php
 
-                </div>
-                <div class="col-lg col-md col-6">
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">খবর</a></li>
-                            <li> <a href="#">ধরণ</a></li>
-                            <li> <a href="#">প্রোফাইল</a></li>
-                        </ul>
-                    </div>
+    // Include the footer file
+    include_once('footer.php');
 
-                </div>
-
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">যোগাযোগ</a></li>
-                            <li> <a href="#">সম্পর্কে</a></li>
-                            <li> <a href="#">প্রাইভেসি</a></li>
-                            <li> <a href="#">শর্তাবলী</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">ডাউনলোড</a></li>
-                            <li> <a href="#">সাহায্য</a></li>
-                            <li> <a href="#">নথিপত্র</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">মিডিয়া</a></li>
-                            <li> <a href="#">ব্লগ</a></li>
-                            <li> <a href="#">ফোরাম</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer end-->
+    ?>
 
     <!-- Scroll to The Top -->
     <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">

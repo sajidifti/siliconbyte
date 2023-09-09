@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Assuming you have a database connection, you can insert the email into the Contacts table here
     // Replace 'your_db_connection.php' with your actual database connection code
-    
+
 
     // Perform the database insertion (assuming you have a 'Contacts' table)
     $insertQuery = "INSERT INTO Contacts (email) VALUES (?)";

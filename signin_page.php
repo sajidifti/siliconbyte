@@ -21,31 +21,31 @@ session_start();
 
 <body>
     <!-- header start-->
-  <header>
-    <div class="container">
-      <!-- nav start-->
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <!--logo-->
-          <a class="navbar-brand" href="index.php">
-            <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
-          </a>
-          <!-- hambarger btn-->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
-            aria-controls="nav_c" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!--nav items-->
+    <header>
+        <div class="container">
+            <!-- nav start-->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <!--logo-->
+                    <a class="navbar-brand" href="index.php">
+                        <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
+                    </a>
+                    <!-- hambarger btn-->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
+                        aria-controls="nav_c" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!--nav items-->
 
-          <div class="collapse navbar-collapse menu" id="nav_c">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="index.php">হোম</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="articles.php">সব খবর</a>
-              </li>
-              <?php if (isset($_SESSION['user_id'])): ?>
+                    <div class="collapse navbar-collapse menu" id="nav_c">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php">হোম</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="articles.php">সব খবর</a>
+                            </li>
+                            <?php if (isset($_SESSION['user_id'])): ?>
                                 <?php if ($_SESSION['role'] == "writer"): ?>
                                     <li class="nav-item">
                                         <a class="nav-link" href="post_page.php">লিখুন</a>
@@ -70,13 +70,13 @@ session_start();
                                     <a class="nav-link active-link" href="signin_page.php">সাইনইন</a>
                                 </li>
                             <?php endif; ?>
-    
+
                         </ul>
-    
+
                     </div>
                 </div>
             </nav>
-    
+
             <!-- nav end-->
         </div>
     </header>
@@ -149,67 +149,12 @@ session_start();
     </section>
     <!-- contact end-->
 
-    <!-- footer start-->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-12">
-                    <address class="f_1">
-                        <p>সিলিকনবাইট<br>আফতাবনগর<br>ঢাকা, বাংলাদেশ</p>
-                        <p>contact@siliconbyte.com</p>
-                        <p>+88 01700000000</p>
-                    </address>
+    <?php
 
-                </div>
-                <div class="col-lg col-md col-6">
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">খবর</a></li>
-                            <li> <a href="#">ধরণ</a></li>
-                            <li> <a href="#">প্রোফাইল</a></li>
-                        </ul>
-                    </div>
+    // Include the footer file
+    include_once('footer.php');
 
-                </div>
-
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">যোগাযোগ</a></li>
-                            <li> <a href="#">সম্পর্কে</a></li>
-                            <li> <a href="#">প্রাইভেসি</a></li>
-                            <li> <a href="#">শর্তাবলী</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">ডাউনলোড</a></li>
-                            <li> <a href="#">সাহায্য</a></li>
-                            <li> <a href="#">নথিপত্র</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-lg col-md col-6">
-
-                    <div class="f_2">
-                        <ul class="list-unstyled">
-                            <li> <a href="#">মিডিয়া</a></li>
-                            <li> <a href="#">ব্লগ</a></li>
-                            <li> <a href="#">ফোরাম</a></li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer end-->
+    ?>
 
     <!-- Scroll to The Top -->
     <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">

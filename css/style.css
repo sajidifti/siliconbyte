@@ -51,8 +51,8 @@ header {
 }
 
 .slider {
-        min-height: 400px !important; /* Adjust the height as needed */
-    }
+  min-height: 400px !important; /* Adjust the height as needed */
+}
 
 .s_content h1 {
   margin-bottom: 25px;
@@ -445,22 +445,22 @@ footer {
   color: #010101;
 }
 
-.article-body{
+.article-body {
   margin-top: 10px;
   text-align: justify;
   color: #010101;
   font-size: larger;
 }
 
-.related-articles{
+.related-articles {
   color: #010101;
 }
 
-.tags{
+.tags {
   margin-top: 20px;
 }
 
-.tags a{
+.tags a {
   text-decoration: none;
   color: #101010;
   background-color: #afb8a5;
@@ -471,11 +471,11 @@ footer {
   margin: 2px;
 }
 
-.tags a:hover{
+.tags a:hover {
   background-color: #f3fde8;
 }
 
-.slider-item{
+.slider-item {
   /* display: flex; */
   /* flex-direction: column; */
   height: 435px;
@@ -498,6 +498,6 @@ footer {
   border-radius: 10px;
 }
 
-.admin{
+.admin {
   padding-bottom: 150px;
 }

@@ -22,7 +22,7 @@ $stmt = $conn->prepare($insert_query);
 
 if ($stmt === false) {
     // Handle the error if the prepared statement fails
-    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+    echo "Prepare failed";
 } else {
     $stmt->bind_param("ss", $event_type, $event_description);
 

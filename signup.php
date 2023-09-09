@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 // Registration successful, redirect to a success page or login page
                 $success = "নিবন্ধন সফল হয়েছে। সাইনইন করুন।";
-                
+
                 $user_id = $stmt->insert_id;
                 // When a user logs in
                 $event_type = "signup";
