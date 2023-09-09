@@ -192,7 +192,7 @@ $conn->close();
                                         পরিবর্তন</a>
                                     <?php if ($_SESSION['role'] == "writer"): ?>
                                         <a type="submit" class="btn c_button alt-button" style="margin-top: 5rem;"
-                                            href="allpost.php">সব খবর</a>
+                                            href="allpost.php">আপনার সব লেখা</a>
                                     <?php endif; ?>
                                     <button type="submit" class="btn c_button" style="margin-top: 5rem;">তথ্য
                                         সংরক্ষণ</button>
