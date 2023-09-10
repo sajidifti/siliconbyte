@@ -83,232 +83,131 @@ $conn->close();
 
 ?>
 
-<!doctype html>
-<html lang="en">
+<!-- Header -->
+<?php
+include_once('pagename.php');
+$page = 'admin';
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+include_once('header.php');
 
-    <!-- Bootstrap CSS  link-->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
-    <title>সিলিকনবাইট</title>
-</head>
+include_once('message.php');
 
-<body>
-    <!-- header start-->
-    <header>
-        <div class="container">
-            <!-- nav start-->
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <!--logo-->
-                    <a class="navbar-brand" href="index.php">
-                        <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
-                    </a>
-                    <!-- hambarger btn-->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav_c"
-                        aria-controls="nav_c" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!--nav items-->
+?>
 
-                    <div class="collapse navbar-collapse menu" id="nav_c">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php">হোম</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="articles.php">সব খবর</a>
-                            </li>
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <?php if ($_SESSION['role'] == "writer"): ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="post_page.php">লিখুন</a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if ($_SESSION['role'] == "admin"): ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link active-link" href="admin.php">ব্যাবস্থাপনা</a>
-                                    </li>
-                                <?php endif; ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="profile.php">প্রোফাইল</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="signout.php">সাইনআউট</a>
-                                </li>
-                            <?php else: ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="signup_page.php">সাইনআপ</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="signin_page.php">সাইনইন</a>
-                                </li>
-                            <?php endif; ?>
-
-                        </ul>
-
-                    </div>
+<section class="admin">
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="c_title text-center">
+                    <h1 class="c_h1 yellow form-title">ব্যাবস্থাপনা পাতা</h1>
+                    <p class="c_p ash">সব তথ্য দেখুন</p>
                 </div>
-            </nav>
-
-            <!-- nav end-->
+            </div>
         </div>
-    </header>
-    <!-- header end-->
-    <!-- Error message display -->
-    <section class="message">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="c_title text-center">
+                    <strong class="c_p ash">পরিসংখ্যান</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>আইডি</th>
+                        <th>ঘটনা</th>
+                        <th>বর্ণনা</th>
+                        <th>তারিখ ও সময়</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php
-                    if (!empty($_GET['error'])) {
-                        $errorMessage = urldecode($_GET['error']);
-                        echo '<div class="alert alert-danger text-center" role="alert">' . $errorMessage . '</div>';
-                    }
-                    if (!empty($_GET['success'])) {
-                        $successMessage = urldecode($_GET['success']);
-                        echo '<div class="alert alert-success text-center" role="alert">' . $successMessage . '</div>';
+                    // Loop through and display data from the Analytics table
+                    foreach ($analyticsData as $row) {
+                        echo '<tr>';
+                        echo '<td>' . $row['id'] . '</td>';
+                        echo '<td>' . $row['event_type'] . '</td>';
+                        echo '<td>' . $row['event_description'] . '</td>';
+                        echo '<td>' . $row['event_datetime'] . '</td>';
+                        echo '</tr>';
                     }
                     ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top: 50px;">
+            <div class="col-lg-9">
+                <div class="c_title text-center">
+                    <strong class="c_p ash">ভিজিটের তথ্য</strong>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Error message display end -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>আইডি</th>
+                        <th>আইপি এড্রেস</th>
+                        <th>তারিখ ও সময়</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Loop through and display data from the Visits table
+                    foreach ($visitsData as $row) {
+                        echo '<tr>';
+                        echo '<td>' . $row['id'] . '</td>';
+                        echo '<td>' . $row['ip_address'] . '</td>';
+                        echo '<td>' . $row['visit_datetime'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
-    <section class="admin">
-        <div class="container mt-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="c_title text-center">
-                        <h1 class="c_h1 yellow form-title">ব্যাবস্থাপনা পাতা</h1>
-                        <p class="c_p ash">সব তথ্য দেখুন</p>
-                    </div>
+
+        <div class="row justify-content-center" style="margin-top: 50px;">
+            <div class="col-lg-9">
+                <div class="c_title text-center">
+                    <strong class="c_p ash">যোগাযোগ তথ্য</strong>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="c_title text-center">
-                        <strong class="c_p ash">পরিসংখ্যান</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>আইডি</th>
-                            <th>ঘটনা</th>
-                            <th>বর্ণনা</th>
-                            <th>তারিখ ও সময়</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Loop through and display data from the Analytics table
-                        foreach ($analyticsData as $row) {
-                            echo '<tr>';
-                            echo '<td>' . $row['id'] . '</td>';
-                            echo '<td>' . $row['event_type'] . '</td>';
-                            echo '<td>' . $row['event_description'] . '</td>';
-                            echo '<td>' . $row['event_datetime'] . '</td>';
-                            echo '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="row justify-content-center" style="margin-top: 50px;">
-                <div class="col-lg-9">
-                    <div class="c_title text-center">
-                        <strong class="c_p ash">ভিজিটের তথ্য</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>আইডি</th>
-                            <th>আইপি এড্রেস</th>
-                            <th>তারিখ ও সময়</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Loop through and display data from the Visits table
-                        foreach ($visitsData as $row) {
-                            echo '<tr>';
-                            echo '<td>' . $row['id'] . '</td>';
-                            echo '<td>' . $row['ip_address'] . '</td>';
-                            echo '<td>' . $row['visit_datetime'] . '</td>';
-                            echo '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="row justify-content-center" style="margin-top: 50px;">
-                <div class="col-lg-9">
-                    <div class="c_title text-center">
-                        <strong class="c_p ash">যোগাযোগ তথ্য</strong>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>আইডি</th>
-                            <th>ইমেইল ঠিকানা</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // Loop through and display data from the Visits table
-                        foreach ($contactsData as $row) {
-                            echo '<tr>';
-                            echo '<td>' . $row['contact_id'] . '</td>';
-                            echo '<td>' . $row['email'] . '</td>';
-                            echo '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
-    </section>
-
-    <?php
-
-    // Include the footer file
-    include_once('footer.php');
-
-    ?>
-
-    <!-- Scroll to The Top -->
-    <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">
-        ^
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>আইডি</th>
+                        <th>ইমেইল ঠিকানা</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Loop through and display data from the Visits table
+                    foreach ($contactsData as $row) {
+                        echo '<tr>';
+                        echo '<td>' . $row['contact_id'] . '</td>';
+                        echo '<td>' . $row['email'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+</section>
 
+<?php
 
-    <!--  Bootstrap JS link -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/c204687a77.js" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+// Include the footer file
+include_once('footer.php');
+
+?>
+
 </body>
 
 </html>
