@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (!isset($_GET['article_id']) || empty($_GET['article_id'])) {
+    // Redirect to the login page or display a message
+    $error = "ভুল লিংক।";
+    header("Location: articles.php?error=" . urlencode($error));
+    exit();
+}
 ?>
 <!-- Header -->
 <?php
@@ -61,20 +68,30 @@ include_once('message.php');
                                                 echo '<img src="' . $article_photo . '" alt="Article Photo" class="img-fluid mb-3 article-photo">';
                                                 echo '<p class="article-body">' . $content . '</p>';
                                             } else {
-                                                echo 'Error retrieving author information.';
+                                                $error = "লেখকের তথ্য পেতে ত্রুটি।";
+                                                header("Location: articles.php?error=" . urlencode($error));
+                                                exit();
                                             }
                                             $stmt_author->close();
                                         } else {
-                                            echo 'Error preparing author query.';
+                                            $error = "লেখক কুয়েরিতে ত্রুটি।";
+                                            header("Location: articles.php?error=" . urlencode($error));
+                                            exit();
                                         }
                                     } else {
-                                        echo 'Article not found.';
+                                        $error = "খবরটি পাওয়া যায়নি।";
+                                        header("Location: articles.php?error=" . urlencode($error));
+                                        exit();
                                     }
                                 } else {
-                                    echo 'Error executing query.';
+                                    $error = "কুয়েরি করতে ত্রুটি।";
+                                    header("Location: articles.php?error=" . urlencode($error));
+                                    exit();
                                 }
                             } else {
-                                echo 'Error preparing query.';
+                                $error = "কুয়েরিতে ত্রুটি।";
+                                header("Location: articles.php?error=" . urlencode($error));
+                                exit();
                             }
 
                             // Close the database connection
@@ -123,7 +140,9 @@ include_once('message.php');
 
                             // End Increase User Category and Tag Read Count
                         } else {
-                            echo 'Invalid article ID.';
+                            $error = "ভুল আর্টিকেল আইডি।";
+                            header("Location: articles.php?error=" . urlencode($error));
+                            exit();
                         }
                         ?>
                     </article>
@@ -232,11 +251,15 @@ include_once('message.php');
                                     // Views count incremented successfully
                                     // You can display a success message if needed
                                 } else {
-                                    echo 'Error incrementing views count.';
+                                    $error = "ভিউ বাড়াতে ত্রুটি।";
+                                    header("Location: articles.php?error=" . urlencode($error));
+                                    exit();
                                 }
                                 $stmt_increment_views->close();
                             } else {
-                                echo 'Error preparing increment views query.';
+                                $error = "ভিউ বাড়ানোর কুয়েরিতে ত্রুটি।";
+                                header("Location: articles.php?error=" . urlencode($error));
+                                exit();
                             }
                             // Query to retrieve the category of the article
                             $category_query = "SELECT category FROM Articles WHERE article_id = ?";
@@ -245,16 +268,23 @@ include_once('message.php');
                                 if ($stmt_category->execute()) {
                                     $category_result = $stmt_category->get_result();
                                     $category_row = $category_result->fetch_assoc();
-                                    $category = $category_row['category'];
-
-                                    // Display the category
-                                    echo '<a href="category.php?category=' . $category . '">' . $category . '</a>';
+                                    if ($category_row > 0) {
+                                        $category = $category_row['category'];
+                                        // Display the category
+                                        echo '<a href="category.php?category=' . $category . '">' . $category . '</a>';
+                                        
+                                    }
+                                    
                                 } else {
-                                    echo 'Error retrieving category information.';
+                                    $error = "বিভাগ তথ্য পেতে ত্রুটি।";
+                                    header("Location: articles.php?error=" . urlencode($error));
+                                    exit();
                                 }
                                 $stmt_category->close();
                             } else {
-                                echo 'Error preparing category query.';
+                                $error = "বিভাগ কুয়েরি করতে ত্রুটি।";
+                                header("Location: articles.php?error=" . urlencode($error));
+                                exit();
                             }
 
                             // Query to retrieve the tags associated with the article
@@ -276,14 +306,20 @@ include_once('message.php');
                                     echo '</div>';
                                     echo '</div>';
                                 } else {
-                                    echo 'Error retrieving tags information.';
+                                    $error = "ট্যাগ এর তথ্য পেতে ত্রুটি।";
+                                    header("Location: articles.php?error=" . urlencode($error));
+                                    exit();
                                 }
                                 $stmt_tags->close();
                             } else {
-                                echo 'Error preparing tags query.';
+                                $error = "এরর।";
+                                header("Location: articles.php?error=" . urlencode($error));
+                                exit();
                             }
                         } else {
-                            echo 'Invalid article ID.';
+                            $error = "ভুল লিংক।";
+                            header("Location: articles.php?error=" . urlencode($error));
+                            exit();
                         }
 
                         // Close the database connection

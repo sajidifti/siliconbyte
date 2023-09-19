@@ -94,6 +94,10 @@
   }
 
   /* footer end*/
+
+  .verticle-card-title, .verticle-card-row {
+    display: none !important;
+  }
 }
 
 /*Small devices (landscape phones, 576px and up)*/

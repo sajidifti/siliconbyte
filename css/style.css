@@ -443,6 +443,7 @@ footer {
   font-size: 40px;
   font-weight: 700;
   color: #010101;
+  text-align: justify;
 }
 
 .article-body {

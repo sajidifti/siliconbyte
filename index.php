@@ -248,8 +248,10 @@ LIMIT 12
 
     </div>
 
+    <!-- Latest News Start -->
+
     <!-- Vertical Card Start -->
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 20px;" class="verticle-card-title">
       <h2><a href="articles.php" class="latest-link">সর্বশেষ <span style="font-size: 120%;">&gt;</span></a></h2>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 verticle-card-row">
@@ -280,27 +282,38 @@ LIMIT 12
         $imageSrc = $row['article_photo'];
 
         // Output the card HTML with dynamic data
-        echo '<!-- Single Card Start -->
-    <div class="col-md-6 verticle-card-col">
-        <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
-            <div class="card mb-3 verticle-card h-100">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="' . $imageSrc . '" class="img-fluid rounded-start" alt="..."
-                            style="object-fit: cover; width: 100%; height: 100%;">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">' . $title . '</h5>
-                            <p class="card-text">' . $truncatedContent . '</p>
-                            <p class="card-text"><small class="text-muted">' . $datePublished . '</small></p>
+        echo '
+<!-- Single Card Start -->
+<div class="col-md-6 verticle-card-col">
+    <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+        <div class="card mb-3 verticle-card" style="height: 210px;"> <!-- Adjust the height as needed -->
+            <div class="row g-0">
+                <div class="col-md-4" style="overflow: hidden;">
+                    <img src="' . $imageSrc . '" class="img-fluid rounded-start w-100 h-100" alt="..."
+                        style="object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body d-flex flex-column h-100">
+                        <h5 class="card-title" style="height: 50px;">' . $title . '</h5> <!-- Adjust the height as needed -->
+                        <p class="card-text" style="height: 80px; overflow: hidden;">' . $truncatedContent . '</p> <!-- Adjust the height as needed -->
+                        <div class="mt-auto" style="height: 20px;"> <!-- Adjust the height as needed -->
+                            <small class="text-muted">' . $datePublished . '</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
-    </div>
-    <!-- Single Card End -->';
+        </div>
+    </a>
+</div>
+<!-- Single Card End -->';
+
+
+
+
+
+
+
+
       }
 
       // Close the database connection
@@ -311,7 +324,9 @@ LIMIT 12
     </div>
     <!-- Vertical Card End -->
 
-    <!-- Others -->
+    <!-- Latest News End -->
+
+    <!-- Others Start -->
     <div style="margin-top: 20px;">
       <h2><a href="articles.php" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
     </div>
@@ -453,6 +468,9 @@ LIMIT 8
       $conn->close();
       ?>
     </div>
+
+    <!-- Others End -->
+
     <div class="col-lg-2 col-md-2 container-fluid">
       <a type="submit" class="btn c_button more-button" style="margin-top: 5rem;" href="articles.php">আরো
         দেখুন</a>
