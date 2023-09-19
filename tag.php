@@ -30,14 +30,14 @@ include_once('message.php');
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="c_title text-center">
-                    <h1 class="c_h1 yellow form-title">
+                    <h1 class="c_h1 yellow form-title text-capitalize">
                         <?php
 
                         echo $categoryBangla;
 
                         ?>
                     </h1>
-                    <p class="c_p ash">
+                    <p class="c_p ash text-capitalize">
                         <?php
 
                         echo $categoryBangla;
