@@ -72,7 +72,7 @@ include_once('message.php');
                 $category = $_GET['category'];
 
                 // Query to retrieve articles of the specified category
-                $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC"; // Adjust the ORDER BY clause as needed
+                $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC"; // Adjust the ORDER BY clause as needed
                 if ($stmt = $conn->prepare($sql)) {
                     $stmt->bind_param("s", $category);
                     $stmt->execute();

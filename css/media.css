@@ -95,8 +95,15 @@
 
   /* footer end*/
 
-  .verticle-card-title, .verticle-card-row {
+  .verticle-card-title,
+  .verticle-card-row {
     display: none !important;
+  }
+
+  /* Tags */
+  .tags a:nth-child(5n) {
+    display: inline-block;
+    margin-top: 10px; /* Adjust the margin as needed */
   }
 }
 
@@ -181,6 +188,12 @@
   }
 
   /* footer end*/
+
+  /* Tags */
+  .tags a:nth-child(5n) {
+    display: inline-block;
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
 }
 
 /*Medium devices (tablets, 768px and up)*/

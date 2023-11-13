@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Update the user's profile photo in the database
             $profilePhotoPath = $uploadDirectory . $newFileName; // Concatenate path with file name
 
-            $query = "UPDATE Users SET fullname=?, email=?, profile_photo=? WHERE username=?";
+            $query = "UPDATE users SET fullname=?, email=?, profile_photo=? WHERE username=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("ssss", $fullname, $email, $profilePhotoPath, $dbUsername);
 
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $user_id = $_SESSION['user_id'];
                 $event_type = "edit profile";
                 $event_description = "User with ID " . $user_id . " edited profile.";
-                $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                $insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
                 $stmt2 = $conn->prepare($insert_query);
                 $stmt2->bind_param("ss", $event_type, $event_description);
                 $stmt2->execute();
@@ -67,14 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         // No profile picture was selected, update other user information
-        $query = "UPDATE Users SET fullname=?, email=? WHERE username=?";
+        $query = "UPDATE users SET fullname=?, email=? WHERE username=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("sss", $fullname, $email, $username);
         // When a user logs in
         $user_id = $_SESSION['user_id'];
         $event_type = "edit profile";
         $event_description = "User with ID " . $user_id . " edited profile.";
-        $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+        $insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
         $stmt2 = $conn->prepare($insert_query);
         $stmt2->bind_param("ss", $event_type, $event_description);
         $stmt2->execute();

@@ -24,7 +24,7 @@ include('db-connection.php');
 
 // Fetch user information based on the user_id from the session
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT fullname, username, email, profile_photo FROM Users WHERE user_id = ?";
+$sql = "SELECT fullname, username, email, profile_photo FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -120,7 +120,7 @@ include_once('message.php');
                                     include 'db-connection.php';
 
                                     // Retrieve tags from the Tags table
-                                    $sql = "SELECT * FROM Tags";
+                                    $sql = "SELECT * FROM tags";
                                     $result = $conn->query($sql);
 
                                     // Create five tag select fields

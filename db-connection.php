@@ -1,13 +1,12 @@
 <?php
 
-// Database configuration
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'siliconbyte';
+$hostname = 'localhost';
+$username = 'ifti';
+$password = '@LegionSlim7';
+$database = 'siliconbyte';
 
-// Create a database connection
-$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+// Create connection
+$conn = new mysqli($hostname, $username, $password, $database);
 
 // Check connection status
 if ($conn->connect_error) {

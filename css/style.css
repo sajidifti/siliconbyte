@@ -292,6 +292,9 @@ footer {
 /* footer end*/
 
 /* Article start*/
+.category-title{
+  margin-top: 3rem;
+}
 .card-link {
   text-decoration: none;
 }

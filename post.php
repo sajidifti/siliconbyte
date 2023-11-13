@@ -62,14 +62,14 @@ if (isset($_SESSION['user_id'])) {
         if (move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFile)) {
             // File uploaded successfully
             // Insert data into the Articles table
-            $insertArticleSQL = "INSERT INTO Articles (title, summary, content, article_photo, category, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $insertArticleSQL = "INSERT INTO articles (title, summary, content, article_photo, category, user_id) VALUES (?, ?, ?, ?, ?, ?)";
             if ($stmt = $conn->prepare($insertArticleSQL)) {
                 $stmt->bind_param("sssssi", $title, $summary, $content, $targetFile, $category, $user_id);
                 if ($stmt->execute()) {
                     $article_id = $stmt->insert_id;
 
                     // Insert tags into the Article_Tags table (many-to-many relationship)
-                    $insertTagSQL = "INSERT INTO Article_Tags (article_id, tag_id) VALUES (?, ?)";
+                    $insertTagSQL = "INSERT INTO article_tags (article_id, tag_id) VALUES (?, ?)";
                     $stmtTag = $conn->prepare($insertTagSQL);
 
                     // Insert the 5 tags individually
@@ -95,7 +95,7 @@ if (isset($_SESSION['user_id'])) {
                     // When a user logs in
                     $event_type = "post";
                     $event_description = "User with ID " . $user_id . " posted article with ID " . $article_id;
-                    $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                    $insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
                     $stmt = $conn->prepare($insert_query);
                     $stmt->bind_param("ss", $event_type, $event_description);
                     $stmt->execute();

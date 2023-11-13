@@ -38,7 +38,7 @@ include_once('message.php');
               // Query the latest 3 articles
               $latest_articles_query = "
         SELECT article_id, title, summary, content, article_photo
-        FROM Articles
+        FROM articles
         ORDER BY DATETIME DESC
         LIMIT 3
     ";
@@ -117,14 +117,13 @@ include_once('message.php');
         $user_id = $_SESSION['user_id'];
 
         $sql = "
-                SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME
-FROM Articles A
-INNER JOIN User_Category_Read_Count U ON A.category = U.category
+SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME, U.read_count
+FROM articles A
+INNER JOIN user_category_read_count U ON A.category = U.category
 WHERE U.user_id = ?
 ORDER BY U.read_count DESC, RAND()
-LIMIT 12
-
-            ";
+LIMIT 12;
+";
 
         if ($stmt = $conn->prepare($sql)) {
           $stmt->bind_param("i", $user_id); // Assuming user_id is an integer
@@ -139,7 +138,7 @@ LIMIT 12
         $sql = "SELECT *
                     FROM (
                         SELECT *
-                        FROM Articles
+                        FROM articles
                         ORDER BY DATETIME DESC
                         LIMIT 12
                     ) AS subquery
@@ -190,7 +189,7 @@ LIMIT 12
         $sql = "SELECT *
                     FROM (
                         SELECT *
-                        FROM Articles
+                        FROM articles
                         ORDER BY DATETIME DESC
                         LIMIT 12
                     ) AS subquery
@@ -263,7 +262,7 @@ LIMIT 12
 
       // Query the database
       $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           ORDER BY DATETIME DESC
           LIMIT 4 OFFSET 3";
 
@@ -340,14 +339,15 @@ LIMIT 12
         $user_id = $_SESSION['user_id'];
 
         $sql = "
-                SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME
-FROM Articles A
-INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
-INNER JOIN Tags T ON AT.tag_id = T.tag_id
-INNER JOIN User_Tag_Read_Count U ON AT.tag_id = U.tag_id
+                SELECT DISTINCT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME, U.read_count
+FROM articles A
+INNER JOIN article_tags AT ON A.article_id = AT.article_id
+INNER JOIN tags T ON AT.tag_id = T.tag_id
+INNER JOIN user_tag_read_count U ON AT.tag_id = U.tag_id
 WHERE U.user_id = ?
 ORDER BY U.read_count DESC, RAND()
-LIMIT 8
+LIMIT 8;
+
 
             ";
 
@@ -364,7 +364,7 @@ LIMIT 8
         $sql = "SELECT *
                     FROM (
                         SELECT *
-                        FROM Articles
+                        FROM articles
                         ORDER BY DATETIME DESC
                         LIMIT 8
                     ) AS subquery
@@ -416,7 +416,7 @@ LIMIT 8
         $sql = "SELECT *
                     FROM (
                         SELECT *
-                        FROM Articles
+                        FROM articles
                         ORDER BY DATETIME DESC
                         LIMIT 8
                     ) AS subquery
@@ -684,7 +684,7 @@ include 'db-connection.php'; // Assuming your database connection code is in thi
 $ip_address = $_SERVER['REMOTE_ADDR'];
 
 // Insert the visit record into the database
-$insert_query = "INSERT INTO Visits (ip_address) VALUES (?)";
+$insert_query = "INSERT INTO visits (ip_address) VALUES (?)";
 $stmt = $conn->prepare($insert_query);
 $stmt->bind_param("s", $ip_address);
 $stmt->execute();

@@ -142,7 +142,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="smartphone">
-            <h2><a href="category.php?category=smartphone" class="latest-link">মুঠোফোন <span
+            <h2><a href="category.php?category=smartphone" class="latest-link category-title">মুঠোফোন <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -155,7 +155,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -220,7 +220,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);
@@ -279,7 +279,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="pc">
-            <h2><a href="category.php?category=pc" class="latest-link">কম্পিউটার <span
+            <h2><a href="category.php?category=pc" class="latest-link category-title">কম্পিউটার <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -292,7 +292,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -357,7 +357,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);
@@ -414,7 +414,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="gaming">
-            <h2><a href="category.php?category=gaming" class="latest-link">ভিডিও গেম <span
+            <h2><a href="category.php?category=gaming" class="latest-link category-title">ভিডিও গেম <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -427,7 +427,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -492,7 +492,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);
@@ -549,7 +549,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="tutorial">
-            <h2><a href="category.php?category=tutorial" class="latest-link">টিউটোরিয়াল <span
+            <h2><a href="category.php?category=tutorial" class="latest-link category-title">টিউটোরিয়াল <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -562,7 +562,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -627,7 +627,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);
@@ -684,7 +684,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="software">
-            <h2><a href="category.php?category=software" class="latest-link">সফটওয়্যার <span
+            <h2><a href="category.php?category=software" class="latest-link category-title">সফটওয়্যার <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -697,7 +697,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -762,7 +762,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);
@@ -818,7 +818,7 @@ include_once('message.php');
     <div class="container">
         <!-- Vertical Card Start -->
         <div style="margin-top: 20px;" id="programing">
-            <h2><a href="category.php?category=programing" class="latest-link">প্রোগ্রামিং <span
+            <h2><a href="category.php?category=programing" class="latest-link category-title">প্রোগ্রামিং <span
                         style="font-size: 120%;">&gt;</span></a></h2>
         </div>
 
@@ -831,7 +831,7 @@ include_once('message.php');
 
             // Query the database
             $query = "SELECT article_id, title, SUBSTRING(content, 1, 100) AS truncated_content, DATETIME, article_photo
-          FROM Articles
+          FROM articles
           WHERE category = ?
           ORDER BY DATETIME DESC
           LIMIT 2";
@@ -896,7 +896,7 @@ include_once('message.php');
             $offset_value = $offset * $limit;
 
             // Query to retrieve articles from the specified category with pagination
-            $sql = "SELECT * FROM Articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
+            $sql = "SELECT * FROM articles WHERE category = ? ORDER BY DATETIME DESC LIMIT ? OFFSET ?";
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $category, $limit, $offset);

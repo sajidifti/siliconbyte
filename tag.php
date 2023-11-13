@@ -59,9 +59,9 @@ include_once('message.php');
 
                 // Query to retrieve articles of the specified category
                 $sql = "SELECT A.article_id, A.title, A.summary, A.content, A.article_photo, A.DATETIME, A.category, A.views, A.user_id
-FROM Articles A
-INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
-INNER JOIN Tags T ON AT.tag_id = T.tag_id
+FROM articles A
+INNER JOIN article_tags AT ON A.article_id = AT.article_id
+INNER JOIN tags T ON AT.tag_id = T.tag_id
 WHERE T.tag_name = ?
 ORDER BY A.DATETIME DESC"; // Adjust the ORDER BY clause as needed
                 if ($stmt = $conn->prepare($sql)) {

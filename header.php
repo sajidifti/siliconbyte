@@ -43,6 +43,9 @@ if (isset($page)) {
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/media.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/stock/fav.png" type="image/png">
   <title>সিলিকনবাইট</title>
 </head>
 
@@ -55,7 +58,7 @@ if (isset($page)) {
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <!--logo-->
-                <a class="navbar-brand" href="index.php">
+                <a class="navbar-brand" href="/">
                     <img src="images/stock/logo.png" class="img-fluid logo" alt="সিলিকনবাইট">
                 </a>
                 <!-- hambarger btn-->
@@ -68,7 +71,7 @@ if (isset($page)) {
                 <div class="collapse navbar-collapse menu" id="nav_c">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $home; ?>" href="index.php">হোম</a>
+                            <a class="nav-link <?php echo $home; ?>" href="/">হোম</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php echo $articles; ?>" href="articles.php">সব খবর</a>

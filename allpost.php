@@ -56,7 +56,7 @@ include_once('message.php');
                 $user_id = $_SESSION['user_id'];
 
                 // Query to retrieve articles of the specified category
-                $sql = "SELECT * FROM Articles WHERE user_id = ? ORDER BY DATETIME DESC"; // Adjust the ORDER BY clause as needed
+                $sql = "SELECT * FROM articles WHERE user_id = ? ORDER BY DATETIME DESC"; // Adjust the ORDER BY clause as needed
                 if ($stmt = $conn->prepare($sql)) {
                     $stmt->bind_param("s", $user_id);
                     $stmt->execute();

@@ -39,14 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "পাসওয়ার্ডদ্বয় মেলে নি। আবার চেষ্টা করুন।";
     } else {
         // Check if the username already exists in the database
-        $checkUsernameQuery = "SELECT username FROM Users WHERE username = ?";
+        $checkUsernameQuery = "SELECT username FROM users WHERE username = ?";
         $checkUsernameStmt = $conn->prepare($checkUsernameQuery);
         $checkUsernameStmt->bind_param("s", $username);
         $checkUsernameStmt->execute();
         $checkUsernameStmt->store_result();
 
         // Check if the email already exists in the database using FILTER_VALIDATE_EMAIL
-        $checkEmailQuery = "SELECT email FROM Users WHERE email = ?";
+        $checkEmailQuery = "SELECT email FROM users WHERE email = ?";
         $checkEmailStmt = $conn->prepare($checkEmailQuery);
         $checkEmailStmt->bind_param("s", $email);
         $checkEmailStmt->execute();
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Insert user data into the Users table
-            $sql = "INSERT INTO Users (fullname, username, email, password, role, profile_photo) VALUES (?, ?, ?, ?, 'reader', ?)";
+            $sql = "INSERT INTO users (fullname, username, email, password, role, profile_photo) VALUES (?, ?, ?, ?, 'reader', ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sssss", $name, $username, $email, $password, $profilePicture);
 
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // When a user logs in
                 $event_type = "signup";
                 $event_description = "User with ID " . $user_id . " signed up.";
-                $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                $insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
                 $stmt = $conn->prepare($insert_query);
                 $stmt->bind_param("ss", $event_type, $event_description);
                 $stmt->execute();

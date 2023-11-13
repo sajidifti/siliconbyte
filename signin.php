@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Prepare a SELECT query with a placeholder for username
-    $sql = "SELECT user_id, username, email, password, role FROM Users WHERE username = ?";
+    $sql = "SELECT user_id, username, email, password, role FROM users WHERE username = ?";
 
     // Create a prepared statement
     $stmt = $conn->prepare($sql);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // When a user logs in
             $event_type = "signin";
             $event_description = "User with ID " . $user_id . " signed in.";
-            $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+            $insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
             $stmt2 = $conn->prepare($insert_query);
             $stmt2->bind_param("ss", $event_type, $event_description);
             $stmt2->execute();

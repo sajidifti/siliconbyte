@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Perform the database insertion (assuming you have a 'Contacts' table)
-    $insertQuery = "INSERT INTO Contacts (email) VALUES (?)";
+    $insertQuery = "INSERT INTO contacts (email) VALUES (?)";
     $stmt = $conn->prepare($insertQuery);
     $stmt->bind_param("s", $email);
 

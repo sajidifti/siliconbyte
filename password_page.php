@@ -26,7 +26,7 @@ include_once('message.php');
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <div class="c_title text-center">
-                    <h1 class="c_h1 yellow form-title">সাইন আপ করুন</h1>
+                    <h1 class="c_h1 yellow form-title">পাসওয়ার্ড পরিবর্তন</h1>
                     <p class="c_p ash">আপনার তথ্য দিন</p>
                 </div>
             </div>

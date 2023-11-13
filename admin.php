@@ -28,7 +28,7 @@ $visitsData = array();
 $contactsData = array(); // Added a new array for contacts data
 
 // Query to retrieve data from the Analytics table
-$analyticsQuery = "SELECT id, event_type, event_description, event_datetime FROM Analytics ORDER BY event_datetime DESC LIMIT 10";
+$analyticsQuery = "SELECT id, event_type, event_description, event_datetime FROM analytics ORDER BY event_datetime DESC LIMIT 10";
 
 // Execute the query
 $analyticsResult = $conn->query($analyticsQuery);
@@ -45,7 +45,7 @@ if ($analyticsResult) {
 }
 
 // Query to retrieve data from the Visits table
-$visitsQuery = "SELECT id, ip_address, visit_datetime FROM Visits ORDER BY visit_datetime DESC LIMIT 10";
+$visitsQuery = "SELECT id, ip_address, visit_datetime FROM visits ORDER BY visit_datetime DESC LIMIT 10";
 
 // Execute the query
 $visitsResult = $conn->query($visitsQuery);
@@ -62,7 +62,7 @@ if ($visitsResult) {
 }
 
 // Query to retrieve data from the Contacts table (corrected variable names)
-$contactsQuery = "SELECT contact_id, email FROM Contacts ORDER BY contact_id DESC LIMIT 10";
+$contactsQuery = "SELECT contact_id, email FROM contacts ORDER BY contact_id DESC LIMIT 10";
 
 // Execute the query
 $contactsResult = $conn->query($contactsQuery);

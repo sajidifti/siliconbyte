@@ -17,7 +17,7 @@ $user_id = $_SESSION["user_id"];
 // When a user logs out
 $event_type = "signout";
 $event_description = "User with ID " . $user_id . " signed out.";
-$insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+$insert_query = "INSERT INTO analytics (event_type, event_description) VALUES (?, ?)";
 $stmt = $conn->prepare($insert_query);
 
 if ($stmt === false) {

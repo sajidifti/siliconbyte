@@ -32,7 +32,7 @@ include_once('message.php');
                             $article_id = $_GET['article_id'];
 
                             // Query to retrieve the article by article_id
-                            $sql = "SELECT * FROM Articles WHERE article_id = ?";
+                            $sql = "SELECT * FROM articles WHERE article_id = ?";
                             if ($stmt = $conn->prepare($sql)) {
                                 $stmt->bind_param("i", $article_id);
                                 if ($stmt->execute()) {
@@ -110,7 +110,7 @@ include_once('message.php');
                                     $article_id = $_GET['article_id'];
 
                                     // Query to get the category of the article
-                                    $get_category_query = "SELECT category FROM Articles WHERE article_id = ?";
+                                    $get_category_query = "SELECT category FROM articles WHERE article_id = ?";
                                     if ($stmt_get_category = $conn->prepare($get_category_query)) {
                                         $stmt_get_category->bind_param("i", $article_id);
                                         $stmt_get_category->execute();
@@ -120,7 +120,7 @@ include_once('message.php');
                         
                                         if (!empty($category)) {
                                             // Increment the read count for the category in User_Category_Read_Count table
-                                            $increment_category_read_query = "INSERT INTO User_Category_Read_Count (user_id, category, read_count) 
+                                            $increment_category_read_query = "INSERT INTO user_category_read_count (user_id, category, read_count) 
                     VALUES (?, ?, 1) 
                     ON DUPLICATE KEY UPDATE read_count = read_count + 1";
                                             if ($stmt_increment_category_read = $conn->prepare($increment_category_read_query)) {
@@ -163,18 +163,18 @@ include_once('message.php');
                     // Query related articles based on categories or tags (modify the query as needed)
                     $sql = "
             SELECT DISTINCT A.article_id, A.title, A.summary, A.article_photo, A.DATETIME
-            FROM Articles A
-            INNER JOIN Article_Tags AT ON A.article_id = AT.article_id
-            INNER JOIN Tags T ON AT.tag_id = T.tag_id
+            FROM articles A
+            INNER JOIN article_tags AT ON A.article_id = AT.article_id
+            INNER JOIN tags T ON AT.tag_id = T.tag_id
             WHERE AT.article_id != ? -- Exclude the current article
             AND (T.tag_name IN (
                 SELECT T.tag_name
-                FROM Article_Tags AT
-                INNER JOIN Tags T ON AT.tag_id = T.tag_id
+                FROM article_tags AT
+                INNER JOIN tags T ON AT.tag_id = T.tag_id
                 WHERE AT.article_id = ?
             ) OR A.category IN (
                 SELECT A.category
-                FROM Articles A
+                FROM articles A
                 WHERE A.article_id = ?
             ))
             ORDER BY RAND()
@@ -244,7 +244,7 @@ include_once('message.php');
                             $article_id = $_GET['article_id'];
 
                             // Query to increment the views count of the article
-                            $increment_views_query = "UPDATE Articles SET views = views + 1 WHERE article_id = ?";
+                            $increment_views_query = "UPDATE articles SET views = views + 1 WHERE article_id = ?";
                             if ($stmt_increment_views = $conn->prepare($increment_views_query)) {
                                 $stmt_increment_views->bind_param("i", $article_id);
                                 if ($stmt_increment_views->execute()) {
@@ -262,7 +262,7 @@ include_once('message.php');
                                 exit();
                             }
                             // Query to retrieve the category of the article
-                            $category_query = "SELECT category FROM Articles WHERE article_id = ?";
+                            $category_query = "SELECT category FROM articles WHERE article_id = ?";
                             if ($stmt_category = $conn->prepare($category_query)) {
                                 $stmt_category->bind_param("i", $article_id);
                                 if ($stmt_category->execute()) {
@@ -288,8 +288,8 @@ include_once('message.php');
                             }
 
                             // Query to retrieve the tags associated with the article
-                            $tags_query = "SELECT T.tag_name FROM Tags AS T
-                                INNER JOIN Article_Tags AS AT ON T.tag_id = AT.tag_id
+                            $tags_query = "SELECT T.tag_name FROM tags AS T
+                                INNER JOIN article_tags AS AT ON T.tag_id = AT.tag_id
                                 WHERE AT.article_id = ?";
                             if ($stmt_tags = $conn->prepare($tags_query)) {
                                 $stmt_tags->bind_param("i", $article_id);
@@ -357,7 +357,7 @@ if (isset($_SESSION['user_id'])) {
         $article_id = $_GET['article_id'];
 
         // Query to get the tags associated with the article
-        $get_tags_query = "SELECT tag_id FROM Article_Tags WHERE article_id = ?";
+        $get_tags_query = "SELECT tag_id FROM article_tags WHERE article_id = ?";
         if ($stmt_get_tags = $conn->prepare($get_tags_query)) {
             $stmt_get_tags->bind_param("i", $article_id);
 
@@ -368,7 +368,7 @@ if (isset($_SESSION['user_id'])) {
             }
 
             // Increment the read count for each tag in User_Tag_Read_Count table
-            $increment_tag_read_query = "INSERT INTO User_Tag_Read_Count (user_id, tag_id, read_count) 
+            $increment_tag_read_query = "INSERT INTO user_tag_read_count (user_id, tag_id, read_count) 
                 VALUES (?, ?, 1) 
                 ON DUPLICATE KEY UPDATE read_count = read_count + 1";
 
