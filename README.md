@@ -2,6 +2,8 @@
 
 SiliconByte is a tech news website built using PHP, designed to provide the latest technology news and recommendations in the Bengali language (Bangla).
 
+Please Visit: https://siliconbyte.sajidifti.com
+
 ## Features
 
 ### 1. Tech News
