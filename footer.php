@@ -62,7 +62,7 @@
 
     <!-- Scroll to The Top -->
     <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">
-        ^
+        ↑
     </div>
 
 

@@ -66,11 +66,6 @@ include_once('message.php');
 
     ?>
 
-    <!-- Scroll to The Top -->
-    <div class="scroll-to-top" id="scrollButton" onclick="scrollToTop()">
-        ^
-    </div>
-
 
     <!--  Bootstrap JS link -->
     <script src="js/popper.min.js"></script>

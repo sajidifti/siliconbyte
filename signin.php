@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Similar logic for other events like signup, post creation, etc.
 
-            header("Location: index.php");
+            header("Location: /");
             exit();
         } else {
             // Password is incorrect

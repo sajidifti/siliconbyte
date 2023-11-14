@@ -236,6 +236,7 @@ include_once('message.php');
                 <div class="col">
                     <div class="tags category">
                         <?php
+                        echo '<i>Category</i><br><br>';
                         // Include the database connection file
                         include 'db-connection.php';
 
@@ -299,6 +300,7 @@ include_once('message.php');
                                     // Display the tags
                                     echo '<div class="col">';
                                     echo '<div class="tags">';
+                                    echo '<i>Tags</i><br><br>';
                                     while ($tag_row = $tags_result->fetch_assoc()) {
                                         $tag_name = $tag_row['tag_name'];
                                         echo '<a href="tag.php?tag=' . $tag_name . '">' . $tag_name . '</a>';
