@@ -1,0 +1,7 @@
+# Admin
+Username: ifti
+Password: admin1234
+
+# Writer
+Username: sajid
+Password: admin1234

@@ -1,12 +1,19 @@
 <?php
 
-$hostname = 'localhost';
-$username = 'ifti';
-$password = '@LegionSlim7';
-$database = 'siliconbyte';
+// Get info from environment variables (NGINX fastcgi_param)
+$host = getenv("DB_HOST");
+$user = getenv("DB_USER");
+$password = getenv("DB_PASSWORD");
+$dbname = getenv("DB_NAME");
+
+// For local server
+// $host = 'localhost';
+// $user = 'root';
+// $password = '';
+// $dbname = 'siliconbyte';
 
 // Create connection
-$conn = new mysqli($hostname, $username, $password, $database);
+$conn = new mysqli($host, $user, $password, $dbname);
 
 // Check connection status
 if ($conn->connect_error) {
@@ -15,5 +22,7 @@ if ($conn->connect_error) {
 
 // Set character set to UTF-8 (if needed)
 $conn->set_charset("utf8");
+
+// echo "DB Connected";
 
 ?>

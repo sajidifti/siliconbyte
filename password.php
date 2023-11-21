@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($newPassword !== $confirmPassword) {
         $error = "নতুন পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মেলে নি।";
 
-        header("Location: password_page.php?success=" . urlencode($error));
+        header("Location: password_page.php?error=" . urlencode($error));
         exit();
     }
 
@@ -45,29 +45,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Hash the new password
                 $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
+                // $stmt->close();
+
                 // Update the user's password in the database
                 $updateQuery = "UPDATE users SET PASSWORD=? WHERE username=?";
                 $updateStmt = $conn->prepare($updateQuery);
                 $updateStmt->bind_param("ss", $newHashedPassword, $dbUsername);
 
                 if ($updateStmt->execute()) {
+
+                    $updateStmt->close();
                     // Password updated successfully
                     $success = "পাসওয়ার্ড পরিবর্তন সফল হয়েছে। সাইনইন করুন।";
 
-                    $user_id = $_SESSION['user_id'];
-                    // When a user logs in
-                    $event_type = "change password";
-                    $event_description = "User with ID " . $user_id . " changed password.";
-                    $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
-                    $stmt2 = $conn->prepare($insert_query);
-                    $stmt2->bind_param("ss", $event_type, $event_description);
-                    $stmt2->execute();
-                    $stmt2->close();
+                    // $user_id = $_SESSION['user_id'];
+                    // // When a user logs in
+                    // $event_type = "change password";
+                    // $event_description = "User with ID " . $user_id . " changed password.";
+                    // $insert_query = "INSERT INTO Analytics (event_type, event_description) VALUES (?, ?)";
+                    // $stmt2 = $conn->prepare($insert_query);
+                    // $stmt2->bind_param("ss", $event_type, $event_description);
+                    // $stmt2->execute();
+                    // $stmt2->close();
+                    
 
                     // Similar logic for other events like signup, post creation, etc.
 
 
                     header("Location: signout.php?success=" . urlencode($success));
+                    $stmt->close();
+                    $updateStmt->close();
                 } else {
                     $error = "পাসওয়ার্ড পরিবর্তন সফল হয়নি। আবার চেষ্টা করুন।\n" . $updateStmt->error;
 
@@ -85,7 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         $error = "ইউজার তথ্য পেতে ব্যর্থ।" . $stmt->error;
-        ;
 
         header("Location: password_page.php?success=" . urlencode($error));
     }
