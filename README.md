@@ -12,15 +12,15 @@ SiliconByte provides up-to-date technology news articles in the Bengali language
 
 ### 2. Recommendation System
 
-The site includes a recommendation system that suggests articles to users based on their interests and reading history. This feature enhances the user experience by offering personalized content. If a user is not logged in, the recommendation system will be turned off and display most viewd and least viewed articles instead.
+The site includes a recommendation system that suggests articles to users based on their interests and reading history. This feature enhances the user experience by offering personalized content. If a user is not logged in, the recommendation system will be turned off and display the most viewed and least viewed articles instead.
 
 ### 3. User Accounts
 
-Users can create accounts, log in, and manage their profiles. The recommendation system utilizes user data to make relevant content suggestions. Writers can write and manage articles. All users can edit their profile.
+Users can create accounts, log in, and manage their profiles. The recommendation system utilizes user data to make relevant content suggestions. Writers can write and manage articles. All users can edit their profiles.
 
 ### 4. Admin Panel
 
-The website includes an admin panel for managing user activity log, visiting user IP address and count, and site settings.
+The website includes an admin panel for managing user activity logs, visiting user IP address and count, and site settings.
 
 ## Requirements
 
@@ -52,7 +52,7 @@ git clone https://github.com/sajidifti/siliconbyte.git
 
 ### 2. Start Web Server and Visit SiliconByte
 
-If you are using Xampp, place the siliconbyte folder inside htdocs. Then visit localhost/siliconbyte.
+If you are using Xampp, place the project folder inside htdocs. Then visit localhost/[project_folder_name].
 
 ## License
 
