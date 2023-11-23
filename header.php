@@ -77,31 +77,31 @@ if (isset($page)) {
                                 <a class="nav-link" href="/#catagories">ক্যাটাগরি</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php echo $articles; ?>" href="articles.php">সব খবর</a>
+                                <a class="nav-link <?php echo $articles; ?>" href="articles">সব খবর</a>
                             </li>
                             <?php if (isset($_SESSION['user_id'])): ?>
                                 <?php if ($_SESSION['role'] == "writer"): ?>
                                     <li class="nav-item">
-                                        <a class="nav-link <?php echo $post; ?>" href="post_page.php">লিখুন</a>
+                                        <a class="nav-link <?php echo $post; ?>" href="post_page">লিখুন</a>
                                     </li>
                                 <?php endif; ?>
                                 <?php if ($_SESSION['role'] == "admin"): ?>
                                     <li class="nav-item">
-                                        <a class="nav-link <?php echo $admin; ?>" href="admin.php">ব্যাবস্থাপনা</a>
+                                        <a class="nav-link <?php echo $admin; ?>" href="admin">ব্যাবস্থাপনা</a>
                                     </li>
                                 <?php endif; ?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo $profile; ?>" href="profile.php">প্রোফাইল</a>
+                                    <a class="nav-link <?php echo $profile; ?>" href="profile">প্রোফাইল</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo $signout; ?>" href="signout.php">সাইনআউট</a>
+                                    <a class="nav-link <?php echo $signout; ?>" href="signout">সাইনআউট</a>
                                 </li>
                             <?php else: ?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo $signup; ?>" href="signup_page.php">সাইনআপ</a>
+                                    <a class="nav-link <?php echo $signup; ?>" href="signup_page">সাইনআপ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo $signin; ?>" href="signin_page.php">সাইনইন</a>
+                                    <a class="nav-link <?php echo $signin; ?>" href="signin_page">সাইনইন</a>
                                 </li>
                             <?php endif; ?>
 

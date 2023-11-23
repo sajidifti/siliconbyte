@@ -66,7 +66,7 @@ include_once('message.php');
                   echo "<h3>$summary</h3>";
                   echo "<p>$content</p>";
                   echo "<div class='col-lg-3 col-md-3'>";
-                  echo "<a type='submit' class='btn c_button more-button' style='margin-top: 5rem;' href='readarticle.php?article_id=$article_id'>আরো পড়ুন</a>";
+                  echo "<a type='submit' class='btn c_button more-button' style='margin-top: 5rem;' href='readarticle?article_id=$article_id'>আরো পড়ুন</a>";
                   echo "</div>";
                   echo "</div>";
                   echo "</div>";
@@ -170,7 +170,7 @@ LIMIT 12;
 
           // HTML for the card
           echo '<div class="col">';
-          echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+          echo '<a href="readarticle?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
           echo '<div class="card h-100 my-card">';
           echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
           echo '<div class="card-body">';
@@ -220,7 +220,7 @@ LIMIT 12;
 
             // HTML for the card
             echo '<div class="col">';
-            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+            echo '<a href="readarticle?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
             echo '<div class="card h-100 my-card">';
             echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
             echo '<div class="card-body">';
@@ -284,7 +284,7 @@ LIMIT 12;
         echo '
 <!-- Single Card Start -->
 <div class="col-md-6 verticle-card-col">
-    <a href="readarticle.php?article_id=' . $articleId . '" class="card-link">
+    <a href="readarticle?article_id=' . $articleId . '" class="card-link">
         <div class="card mb-3 verticle-card" style="height: 210px;"> <!-- Adjust the height as needed -->
             <div class="row g-0">
                 <div class="col-md-4" style="overflow: hidden;">
@@ -306,13 +306,6 @@ LIMIT 12;
 </div>
 <!-- Single Card End -->';
 
-
-
-
-
-
-
-
       }
 
       // Close the database connection
@@ -327,7 +320,7 @@ LIMIT 12;
 
     <!-- Others Start -->
     <div style="margin-top: 20px;">
-      <h2><a href="articles.php" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
+      <h2><a href="articles" class="latest-link">অন্যান্য <span style="font-size: 120%;">&gt;</span></a></h2>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <?php
@@ -396,7 +389,7 @@ LIMIT 8;
 
           // HTML for the card
           echo '<div class="col">';
-          echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+          echo '<a href="readarticle?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
           echo '<div class="card h-100 my-card">';
           echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
           echo '<div class="card-body">';
@@ -447,7 +440,7 @@ LIMIT 8;
 
             // HTML for the card
             echo '<div class="col">';
-            echo '<a href="readarticle.php?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
+            echo '<a href="readarticle?article_id=' . $article_id . '" class="card-link">'; // Replace with your actual URL
             echo '<div class="card h-100 my-card">';
             echo '<img src="' . $article_photo . '" class="card-img-top" alt="' . $title . '" />';
             echo '<div class="card-body">';
@@ -499,7 +492,7 @@ LIMIT 8;
     <div class="row">
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=smartphone"> <!-- Add your link within the href attribute -->
+        <a href="category?category=smartphone"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
@@ -518,7 +511,7 @@ LIMIT 8;
       <!-- single item end-->
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=pc"> <!-- Add your link within the href attribute -->
+        <a href="category?category=pc"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
@@ -537,7 +530,7 @@ LIMIT 8;
       <!-- single item end-->
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=gaming"> <!-- Add your link within the href attribute -->
+        <a href="category?category=gaming"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
@@ -556,7 +549,7 @@ LIMIT 8;
       <!-- single item end-->
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=tutorial"> <!-- Add your link within the href attribute -->
+        <a href="category?category=tutorial"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
@@ -575,7 +568,7 @@ LIMIT 8;
       <!-- single item end-->
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=software"> <!-- Add your link within the href attribute -->
+        <a href="category?category=software"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
@@ -594,7 +587,7 @@ LIMIT 8;
       <!-- single item end-->
       <!-- single item start-->
       <div class="col-lg-4 col-sm-6 single_item">
-        <a href="category.php?category=programing"> <!-- Add your link within the href attribute -->
+        <a href="category?category=programing"> <!-- Add your link within the href attribute -->
           <div class="row">
             <div class="col-lg-3">
               <div class="a_icon text-center">
