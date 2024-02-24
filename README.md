@@ -47,7 +47,7 @@ You can also use XAMPP to run the project.
 ### 1. Clone This Repo
 
 ```bash
-git clone https://github.com/sajidifti/siliconbyte.git
+git clone https://github.com/sajidifti/Siliconbyte_Bangla_Tech_News_Site_PHP
 ```
 
 ### 2. Start Web Server and Visit SiliconByte
